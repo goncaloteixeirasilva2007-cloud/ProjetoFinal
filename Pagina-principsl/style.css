@@ -1,0 +1,391 @@
+:root {
+    --cor1: #45A29E;
+    --cor2: #F18F01;
+    --cor3: #E0E0E0;
+    --preto: #111111;
+    --branco: #ffffff;
+    --cinza: #dadada;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--preto);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--cor3);
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 50px;
+    background: var(--branco);
+    border-bottom: 1px solid var(--cinza);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    padding: 15px 50px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 50px;
+    display: block;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+header .logo img:hover {
+    transform: scale(1.05) rotate(5deg);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: var(--preto);
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: var(--cor1);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: var(--cor1);
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--preto);
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* HERO PRINCIPAL */
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #1a1a1a 0%, var(--cor1) 50%, var(--cor2) 100%);
+    color: var(--branco);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Partículas de fundo animadas */
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px, 80px 80px, 100px 100px;
+    animation: moveParticles 20s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes moveParticles {
+    0% { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 50px 50px, 80px 80px, 100px 100px; }
+}
+
+/* Cursor customizado */
+.cursor-follower {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cor1);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    mix-blend-mode: difference;
+    opacity: 0;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    animation: fadeInUp 1s ease forwards;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+}
+
+.hero p {
+    font-size: 22px;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.5;
+    text-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+    animation: fadeInUp 1.5s ease forwards;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+}
+
+/* BOTÃO PREMIUM */
+.enter {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 16px 50px;
+    color: var(--preto);
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--branco) 0%, var(--cor3) 100%);
+    border: 2px solid var(--cor1);
+    border-radius: 60px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 25px rgba(69, 162, 158, 0.4);
+    text-shadow: none;
+    background-size: 200% 200%;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInUp 2s ease forwards;
+}
+
+.enter::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: var(--cor1);
+    transition: width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.enter:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.enter:hover {
+    color: var(--branco);
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(69, 162, 158, 0.6);
+    border-color: var(--cor1);
+}
+
+.enter:active {
+    transform: scale(0.98);
+}
+
+/* Ondas animadas */
+.enter::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--cor1);
+    border-radius: 60px;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* FOOTER */
+footer {
+    width: 100%;
+    background: var(--branco);
+    color: var(--preto);
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 14px;
+    border-top: 1px solid var(--cinza);
+}
+
+/* Loading Animation */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--cor1), var(--cor2));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255,255,255,0.3);
+    border-top-color: var(--branco);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Partículas flutuantes */
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-30px) scale(1.1); opacity: 0.4; }
+}
+
+/* RESPONSIVO */
+@media (max-width: 1024px) {
+    header {
+        padding: 20px 30px;
+    }
+    nav a {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--branco);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    nav.active {
+        max-height: 300px;
+    }
+
+    nav a {
+        margin: 10px 0;
+        margin-left: 0;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+    .hero p {
+        font-size: 18px;
+    }
+    .enter {
+        font-size: 18px;
+        padding: 14px 40px;
+    }
+}
