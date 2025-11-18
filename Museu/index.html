@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeria • Meu Museu Digital</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- CSS Externo - COLOCA ESTE FICHEIRO EM: css/galeria.css -->
+    <link rel="stylesheet" href="/Museu/style.css">
+</head>
+
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Cursor customizado -->
+    <div class="cursor-follower" id="cursorFollower" aria-hidden="true"></div>
+
+    <!-- Controles de áudio -->
+    <div class="audio-control" id="audioControl">
+        <button id="audioToggle" aria-label="Controlar música ambiente">
+            <svg class="audio-icon" id="audioIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+        </button>
+    </div>
+    
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="/Museu/index.html" class="logo">
+                <img src="/img/G__1_-removebg-preview.png" alt="Logo" id="logo" />
+            </a>
+            
+            <!-- Hamburger Menu -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Desktop Nav -->
+            <nav class="nav-desktop">
+                <a href="/Pagina-principsl/index.html" class="nav-link">Home</a>
+                <a href="/Sobre mim/index.html" class="nav-link">Sobre Mim</a>
+                <a href="/Museu/index.html" class="nav-link active">Museu</a>
+                <a href="contactos.html" class="nav-link">Contactos</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Nav -->
+        <nav class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-content">
+                <a href="/Pagina-principsl/index.html">Home</a>
+                <a href="/Sobre mim/index.html">Sobre Mim</a>
+                <a href="/Museu/index.html" class="active">Museu</a>
+                <a href="contactos.html">Contactos</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Iluminação ambiente do museu -->
+    <div class="museum-lighting"></div>
+    <div class="museum-lighting museum-lighting-2"></div>
+    <div class="museum-lighting museum-lighting-3"></div>
+
+    <!-- SEÇÃO PRINCIPAL -->
+    <section class="gallery-section">
+        
+        <div class="gallery-container">
+
+            <!-- Título Principal -->
+            <div class="gallery-header">
+                <span class="gallery-subtitle">BEM-VINDO AO MUSEU</span>
+                <h1 class="gallery-title">Coleção de Arte Digital</h1>
+                <p class="gallery-description">
+                    Explore três séries fotográficas cuidadosamente curadas, 
+                    cada uma contando sua própria história visual.
+                </p>
+            </div>
+
+            <!-- SÉRIE 1: Natureza -->
+            <div class="series-section" data-series="1">
+                <div class="series-header">
+                    <h2 class="series-title">Série I — Abstração</h2>
+                    <p class="series-description">Uma celebração da beleza natural e orgânica do mundo ao nosso redor</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="photo-frame" data-photo="1">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="/img abrstatas/IMG_1247_polarr.jpeg" alt="Natureza 1" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Amanhecer Dourado</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="2">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="/img abrstatas/nova 1.jpeg" alt="Natureza 2" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Reflexos da Alma</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="3">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="/img abrstatas/IMG_1799_polarr.jpeg" alt="Natureza 3" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Harmonia Verde</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="4">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="/img abrstatas/nova 2.jpeg" alt="Natureza 4" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Serenidade Azul</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="5">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="/img abrstatas/nova 3.jpeg" alt="Natureza 5" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Luz Entre Folhas</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="6">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="/img abrstatas/IMG_7127_polarr.jpeg" alt="Natureza 6" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Montanhas Eternas</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="7">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="/img abrstatas/IMG_7733_polarr.jpeg" alt="Natureza 7" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Pôr do Sol Infinito</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="8">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="/img abrstatas/IMG_8991_polarr.jpeg" alt="Natureza 8" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Caminho Silencioso</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SÉRIE 2: Urbano -->
+            <div class="series-section" data-series="2">
+                <div class="series-header">
+                    <h2 class="series-title">Série II — Vida Urbana</h2>
+                    <p class="series-description">O pulsar das cidades modernas capturado em momentos únicos</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="photo-frame" data-photo="9">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/urbano-1.jpg" alt="Urbano 1" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Geometria Urbana</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="10">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/urbano-2.jpg" alt="Urbano 2" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Luzes da Noite</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="11">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/urbano-3.jpg" alt="Urbano 3" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Ruas Vazias</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="12">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/urbano-4.jpg" alt="Urbano 4" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Movimento Constante</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="13">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/urbano-5.jpg" alt="Urbano 5" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Arranha-Céus</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="14">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/urbano-6.jpg" alt="Urbano 6" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Perspectivas</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="15">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/urbano-7.jpg" alt="Urbano 7" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Neón e Sombras</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="16">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/urbano-8.jpg" alt="Urbano 8" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Horizonte Infinito</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SÉRIE 3: Abstrato -->
+            <div class="series-section" data-series="3">
+                <div class="series-header">
+                    <h2 class="series-title">Série III — Expressões Abstratas</h2>
+                    <p class="series-description">Formas, cores e texturas que desafiam a percepção convencional</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="photo-frame" data-photo="17">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/abstrato-1.jpg" alt="Abstrato 1" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Cores em Movimento</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="18">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/abstrato-2.jpg" alt="Abstrato 2" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Texturas Vivas</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="19">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/abstrato-3.jpg" alt="Abstrato 3" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Fluídez</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="20">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/abstrato-4.jpg" alt="Abstrato 4" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Caos Organizado</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="21">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/abstrato-5.jpg" alt="Abstrato 5" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Dimensões</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="22">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/abstrato-6.jpg" alt="Abstrato 6" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Espelho d'Alma</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="23">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/abstrato-7.jpg" alt="Abstrato 7" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Fragmentos</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+
+                    <div class="photo-frame" data-photo="24">
+                        <div class="frame-shadow"></div>
+                        <div class="frame-border">
+                            <img src="img/galeria/abstrato-8.jpg" alt="Abstrato 8" loading="lazy">
+                            <div class="photo-info">
+                                <span class="photo-title">Profundidade Infinita</span>
+                            </div>
+                        </div>
+                        <div class="frame-spotlight"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal para ampliar foto -->
+    <div class="photo-modal" id="photoModal">
+        <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+        <button class="modal-nav modal-prev" id="modalPrev" aria-label="Anterior">‹</button>
+        <button class="modal-nav modal-next" id="modalNext" aria-label="Próximo">›</button>
+        <div class="modal-content">
+            <img src="" alt="" id="modalImage">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2025 Meu Museu Digital. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- JavaScript Externo - COLOCA ESTE FICHEIRO EM: js/galeria.js -->
+   <script src="/Museu/script.js"></script>
+<link rel="stylesheet" href="/Museu/style.css">
+
+</body>
+</html>

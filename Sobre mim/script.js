@@ -116,7 +116,7 @@ mainSection.addEventListener('mousemove', (e) => {
 // ============= EFEITO DE TYPING NO TÍTULO =============
 const title = document.querySelector('.gradient-text');
 const titleText = title.textContent;
-title.textContent = 'Uma viagem pela arte Visual';
+title.textContent = 'Uma caminhada pela arte Visual';
 
 let charIndex = 0;
 function typeWriter() {}
