@@ -160,42 +160,33 @@ nav a:hover {
 }
 
 /* Cursor customizado */
+/* ============= CURSOR CUSTOMIZADO ============= */
 .cursor-follower {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--cor1);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transition: all 0.15s ease;
-    mix-blend-mode: difference;
-    opacity: 0;
+    width: 20px;                    /* 🔧 Tamanho do cursor */
+    height: 20px;                   /* 🔧 Tamanho do cursor */
+    border: 2px solid var(--cor1);  /* 🔧 Cor da borda */
+    border-radius: 50%;             /* Formato circular */
+    position: fixed;                /* Fixa na tela */
+    pointer-events: none;           /* Não bloqueia cliques */
+    z-index: 9998;                  /* Fica acima de tudo */
+    transition: all 0.15s ease;     /* 🔧 Velocidade da transição */
+    mix-blend-mode: difference;     /* 🔧 Efeito de mistura */
+    opacity: 0;                     /* Invisível até mover o mouse */
+    background-color: transparent;  /* Fundo transparente */
 }
 
-.hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 64px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-    animation: fadeInUp 1s ease forwards;
-    position: relative;
-    z-index: 1;
-    opacity: 0;
+/* Cursor expandido ao passar por links/botões */
+.cursor-follower.expanded {
+    width: 50px;                    /* 🔧 Tamanho expandido */
+    height: 50px;                   /* 🔧 Tamanho expandido */
+    background-color: rgba(69, 162, 158, 0.2); /* 🔧 Cor de fundo */
 }
 
-.hero p {
-    font-size: 22px;
-    margin-bottom: 40px;
-    max-width: 600px;
-    line-height: 1.5;
-    text-shadow: 1px 1px 8px rgba(0,0,0,0.2);
-    animation: fadeInUp 1.5s ease forwards;
-    position: relative;
-    z-index: 1;
-    opacity: 0;
+/* Desativa em dispositivos touch (mobile) */
+@media (hover: none), (pointer: coarse) {
+    .cursor-follower { 
+        display: none !important; 
+    }
 }
 
 /* BOTÃO PREMIUM */

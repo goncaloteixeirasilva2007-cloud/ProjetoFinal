@@ -1,4 +1,3 @@
-// ============= MODAL DE FOTO =============
 /* ===============================================
    GALERIA DO MUSEU - JAVASCRIPT
    =============================================== */
@@ -21,7 +20,7 @@ hamburger.addEventListener('click', () => {
     mobileMenu.classList.toggle('active');
 });
 
-// ============= CURSOR PERSONALIZADO =============
+// ============= CURSOR PERSONALIZADO (IGUAL ÀS OUTRAS PÁGINAS) =============
 const cursorFollower = document.getElementById('cursorFollower');
 let mouseX = 0, mouseY = 0;
 let followerX = 0, followerY = 0;
@@ -46,27 +45,6 @@ function animateCursor() {
 }
 
 animateCursor();
-
-// Hover effect em elementos interativos
-const interactiveElements = document.querySelectorAll('a, button, .photo-frame, .nav-link, .logo img');
-interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursorFollower.classList.add('hover');
-    });
-    
-    el.addEventListener('mouseleave', () => {
-        cursorFollower.classList.remove('hover');
-    });
-});
-
-// Click effect
-document.addEventListener('mousedown', () => {
-    cursorFollower.classList.add('click');
-});
-
-document.addEventListener('mouseup', () => {
-    cursorFollower.classList.remove('click');
-});
 
 // ============= ÁUDIO AMBIENTE =============
 let audio = null;
@@ -133,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', startAudio);
 });
 
-// ============= MODAL DE FOTO =============
+// ============= MODAL DE FOTO COM MOLDURA =============
 const photoModal = document.getElementById('photoModal');
 const modalContent = document.getElementById('modalContent');
 const modalTitle = document.getElementById('modalTitle');
@@ -199,10 +177,14 @@ function openModal(index) {
     
     console.log('Abrindo modal com:', photo);
     
-    // Cria a imagem com moldura
+    // Cria a imagem com a MESMA moldura de museu
     modalContent.innerHTML = `
-        <div class="modal-frame">
-            <img src="${photo.src}" alt="${photo.alt}">
+        <div class="modal-frame-container">
+            <div class="modal-frame-shadow"></div>
+            <div class="modal-frame-border">
+                <img src="${photo.src}" alt="${photo.alt}">
+            </div>
+            <div class="modal-frame-spotlight"></div>
         </div>
     `;
     
@@ -232,10 +214,14 @@ function navigateModal(direction) {
     
     const photo = allPhotos[currentPhotoIndex];
     
-    // Atualiza a imagem com moldura
+    // Atualiza a imagem mantendo a moldura
     modalContent.innerHTML = `
-        <div class="modal-frame">
-            <img src="${photo.src}" alt="${photo.alt}">
+        <div class="modal-frame-container">
+            <div class="modal-frame-shadow"></div>
+            <div class="modal-frame-border">
+                <img src="${photo.src}" alt="${photo.alt}">
+            </div>
+            <div class="modal-frame-spotlight"></div>
         </div>
     `;
     

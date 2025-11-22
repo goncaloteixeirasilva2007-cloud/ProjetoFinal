@@ -1,0 +1,567 @@
+:root {
+    --cor1: #45A29E;
+    --cor2: #F18F01;
+    --cor3: #E0E0E0;
+    --preto: #111111;
+    --branco: #ffffff;
+    --cinza: #dadada;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--preto);
+    background: linear-gradient(135deg, #dff8f6 0%, #fef6e4 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ============= PARTÍCULAS DE FUNDO ============= */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--cor1);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-particle 8s infinite ease-in-out;
+}
+
+@keyframes float-particle {
+    0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ============= CURSOR CUSTOMIZADO ============= */
+.cursor-follower {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cor1);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    mix-blend-mode: difference;
+    opacity: 0;
+    background-color: transparent;
+}
+
+.cursor-follower.expanded {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(69, 162, 158, 0.2);
+}
+
+@media (hover: none), (pointer: coarse) {
+    .cursor-follower { display: none !important; }
+}
+
+/* ============= HEADER ============= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 50px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--cinza);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    animation: slideDown 0.6s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+header.scrolled {
+    padding: 15px 50px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.98);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 50px;
+    display: block;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+}
+
+header .logo img:hover {
+    transform: scale(1.05) rotate(5deg);
+    filter: drop-shadow(0 4px 10px rgba(69, 162, 158, 0.4));
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: var(--preto);
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background: linear-gradient(90deg, var(--cor1), var(--cor2));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: var(--cor1);
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 10px;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--preto);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ============= SEÇÃO DE CONTACTOS ============= */
+.contactos-section {
+    min-height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.contactos-container {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+    animation: fadeInUp 1s ease;
+}
+
+.contactos-header {
+    margin-bottom: 60px;
+}
+
+.contactos-subtitle {
+    color: var(--cor1);
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-size: 14px;
+    text-transform: uppercase;
+    animation: fadeIn 0.8s ease;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.contactos-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 700;
+    margin: 20px 0;
+    background: linear-gradient(90deg, #45A29E, #F18F01, #45A29E);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease infinite, titleBounce 1s ease 0.2s;
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes titleBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.contactos-description {
+    font-size: 18px;
+    color: rgba(26, 26, 26, 0.7);
+    max-width: 600px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease 0.4s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* ============= CARTÕES DE CONTACTO ============= */
+.contactos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.contacto-card {
+    background: var(--branco);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInScale 0.8s ease forwards;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.contacto-card:nth-child(1) { animation-delay: 0.1s; }
+.contacto-card:nth-child(2) { animation-delay: 0.2s; }
+.contacto-card:nth-child(3) { animation-delay: 0.3s; }
+.contacto-card:nth-child(4) { animation-delay: 0.4s; }
+
+.contacto-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cor1), var(--cor2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.contacto-card:hover::before {
+    transform: scaleX(1);
+}
+
+.card-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(69, 162, 158, 0.3), transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+.contacto-card:hover .card-glow {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+.contacto-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(69, 162, 158, 0.4);
+}
+
+.contacto-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--cor1), var(--cor2));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--branco);
+    font-size: 32px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 5px 15px rgba(69, 162, 158, 0.3);
+    position: relative;
+}
+
+.contacto-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cor1), var(--cor2));
+    z-index: -1;
+    opacity: 0.5;
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+.contacto-card:hover .contacto-icon {
+    transform: scale(1.15) rotate(360deg);
+    box-shadow: 0 10px 25px rgba(69, 162, 158, 0.5);
+}
+
+.contacto-nome {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--preto);
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.contacto-card:hover .contacto-nome {
+    color: var(--cor1);
+}
+
+.contacto-info {
+    font-size: 16px;
+    color: rgba(26, 26, 26, 0.7);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.contacto-card:hover .contacto-info {
+    transform: translateY(-3px);
+}
+
+.contacto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, var(--cor1), var(--cor2));
+    color: var(--branco);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(69, 162, 158, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.contacto-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.contacto-link:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.contacto-link .arrow {
+    transition: transform 0.3s ease;
+}
+
+.contacto-link:hover .arrow {
+    transform: translateX(5px);
+}
+
+.contacto-link:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 30px rgba(69, 162, 158, 0.6);
+}
+
+/* ============= FOOTER ============= */
+footer {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    color: var(--preto);
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 14px;
+    border-top: 1px solid var(--cinza);
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1s ease 0.8s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+/* ============= ANIMAÇÕES ============= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ============= RESPONSIVO ============= */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    nav.active {
+        max-height: 300px;
+    }
+
+    nav a {
+        margin: 10px 0;
+        margin-left: 0;
+        animation: slideIn 0.3s ease forwards;
+        opacity: 0;
+    }
+
+    nav.active a:nth-child(1) { animation-delay: 0.1s; }
+    nav.active a:nth-child(2) { animation-delay: 0.2s; }
+    nav.active a:nth-child(3) { animation-delay: 0.3s; }
+    nav.active a:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .contactos-title {
+        font-size: 36px;
+    }
+
+    .contactos-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    header {
+        padding: 15px 20px;
+    }
+
+    header.scrolled {
+        padding: 12px 20px;
+    }
+}

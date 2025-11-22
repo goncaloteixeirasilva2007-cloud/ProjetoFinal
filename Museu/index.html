@@ -11,7 +11,7 @@
     <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-    <!-- CSS Externo - COLOCA ESTE FICHEIRO EM: css/galeria.css -->
+    <!-- CSS Externo -->
     <link rel="stylesheet" href="/Museu/style.css">
 </head>
 
@@ -54,7 +54,7 @@
                 <a href="/Pagina-principsl/index.html" class="nav-link">Home</a>
                 <a href="/Sobre mim/index.html" class="nav-link">Sobre Mim</a>
                 <a href="/Museu/index.html" class="nav-link active">Museu</a>
-                <a href="contactos.html" class="nav-link">Contactos</a>
+                <a href="/contactos/index.html" class="nav-link">Contactos</a>
             </nav>
         </div>
 
@@ -391,11 +391,11 @@
         <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
         <button class="modal-nav modal-prev" id="modalPrev" aria-label="Anterior">‹</button>
         <button class="modal-nav modal-next" id="modalNext" aria-label="Próximo">›</button>
-        <div class="modal-content">
-            <img src="" alt="" id="modalImage">
-            <div class="modal-info">
-                <h3 id="modalTitle"></h3>
-            </div>
+        <div class="modal-content" id="modalContent">
+            <!-- A moldura será inserida aqui pelo JavaScript -->
+        </div>
+        <div class="modal-info">
+            <h3 id="modalTitle"></h3>
         </div>
     </div>
 
@@ -404,9 +404,8 @@
         <p>&copy; 2025 Meu Museu Digital. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- JavaScript Externo - COLOCA ESTE FICHEIRO EM: js/galeria.js -->
-   <script src="/Museu/script.js"></script>
-<link rel="stylesheet" href="/Museu/style.css">
+    <!-- JavaScript -->
+    <script src="/Museu/script.js"></script>
 
 </body>
 </html>

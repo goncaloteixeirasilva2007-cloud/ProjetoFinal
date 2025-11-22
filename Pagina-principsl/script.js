@@ -33,12 +33,58 @@ window.addEventListener('scroll', () => {
 
 const cursor = document.getElementById("cursor");
 
-// Movimento suave do cursor
-document.addEventListener("mousemove", (e) => {
-    cursor.style.top = e.clientY + "px";
-    cursor.style.left = e.clientX + "px";
+// ============= CURSOR PERSONALIZADO =============
+
+// Seleciona o elemento do cursor
+const cursorFollower = document.getElementById('cursorFollower');
+
+// Variáveis para armazenar a posição do mouse e do cursor
+let mouseX = 0, mouseY = 0;      // Posição real do mouse
+let followerX = 0, followerY = 0; // Posição do cursor visual
+
+// Detecta movimento do mouse
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;  // Posição X do mouse
+    mouseY = e.clientY;  // Posição Y do mouse
+    cursorFollower.style.opacity = '1'; // Torna o cursor visível
 });
 
+// Seleciona todos os elementos interativos (links, botões, cards)
+const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
+
+// Para cada elemento interativo
+interactiveElements.forEach(element => {
+    // Quando o mouse ENTRA no elemento
+    element.addEventListener('mouseenter', () => {
+        cursorFollower.classList.add('expanded'); // Expande o cursor
+    });
+    
+    // Quando o mouse SAI do elemento
+    element.addEventListener('mouseleave', () => {
+        cursorFollower.classList.remove('expanded'); // Volta ao tamanho normal
+    });
+});
+
+// Função de animação suave do cursor
+function animateCursor() {
+    // Calcula a diferença entre a posição do mouse e do cursor
+    const diffX = mouseX - followerX;
+    const diffY = mouseY - followerY;
+    
+    // Move o cursor 10% em direção ao mouse (efeito de "seguir")
+    followerX += diffX * 0.1; // 🔧 Mude 0.1 para mais rápido (0.2) ou mais lento (0.05)
+    followerY += diffY * 0.1;
+    
+    // Aplica a posição calculada
+    cursorFollower.style.left = followerX + 'px';
+    cursorFollower.style.top = followerY + 'px';
+    
+    // Continua a animação em loop
+    requestAnimationFrame(animateCursor);
+}
+
+// Inicia a animação do cursor
+animateCursor();
 // Elementos interativos que ativam o hover
 const targets = document.querySelectorAll("a, button, input, textarea, select, .hover-target");
 

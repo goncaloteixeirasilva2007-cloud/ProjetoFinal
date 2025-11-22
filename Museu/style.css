@@ -38,7 +38,7 @@ body {
     transition: width 0.1s ease;
 }
 
-/* ============= CURSOR CUSTOMIZADO ============= */
+/* ============= CURSOR CUSTOMIZADO (IGUAL ÀS OUTRAS PÁGINAS) ============= */
 .cursor-follower {
     width: 20px;
     height: 20px;
@@ -51,15 +51,6 @@ body {
     mix-blend-mode: difference;
     opacity: 0;
     background-color: transparent;
-}
-
-.cursor-follower.hover {
-    transform: scale(2);
-    background-color: rgba(69, 162, 158, 0.3);
-}
-
-.cursor-follower.click {
-    transform: scale(0.5);
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -119,7 +110,7 @@ body {
 }
 
 .header-container {
-    max: w -7xl;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -503,7 +494,7 @@ body {
     display: block;
 }
 
-/* ============= MODAL ============= */
+/* ============= MODAL COM MOLDURA DE MUSEU ============= */
 .photo-modal {
     position: fixed;
     top: 0;
@@ -513,6 +504,7 @@ body {
     background: rgba(0, 0, 0, 0.95);
     z-index: 1000;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     opacity: 0;
@@ -526,27 +518,97 @@ body {
 }
 
 .modal-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     max-width: 90%;
     max-height: 90%;
     animation: modalZoom 0.5s ease;
 }
 
-.modal-content img {
-    max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    border: 15px solid #8b7355;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+/* Moldura do modal - IGUAL à galeria mas maior */
+.modal-frame-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-frame-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    filter: blur(40px);
+    transform: translateY(20px);
+    z-index: -1;
+}
+
+.modal-frame-border {
+    position: relative;
+    padding: 30px;
+    background: linear-gradient(145deg, #8b7355, #5c4a3a);
+    border: 5px solid #d4af37;
+    box-shadow: 
+        inset 0 3px 8px rgba(255, 255, 255, 0.3),
+        inset 0 -3px 8px rgba(0, 0, 0, 0.5),
+        0 20px 60px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+}
+
+.modal-frame-border::before {
+    content: '';
+    position: absolute;
+    inset: 22px;
+    border: 3px solid #a67c52;
+    pointer-events: none;
+}
+
+.modal-frame-border::after {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    pointer-events: none;
+}
+
+.modal-frame-border img {
+    width: 400px;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+}
+
+.modal-frame-spotlight {
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 60%
+    );
+    transform: translateX(-50%);
+    opacity: 1;
+    pointer-events: none;
 }
 
 .modal-info {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 40px;
+    position: relative;
+    width: 100%;
 }
 
 .modal-info h3 {
     font-size: 24px;
     color: var(--branco);
+    font-family: 'Playfair Display', serif;
 }
 
 .modal-close {
@@ -564,6 +626,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    z-index: 1001;
 }
 
 .modal-close:hover {
@@ -586,6 +649,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    z-index: 1001;
 }
 
 .modal-nav:hover {
@@ -661,10 +725,6 @@ body {
     .header-container {
         padding: 16px 24px;
     }
-    
-    .nav-desktop a {
-        gap: 20px;
-    }
 
     .gallery-title {
         font-size: 36px;
@@ -686,6 +746,15 @@ body {
 
     .frame-border img {
         height: 200px;
+    }
+
+    .modal-frame-border {
+        padding: 20px;
+    }
+
+    .modal-frame-border img {
+        max-width: 90vw;
+        max-height: 60vh;
     }
 
     .audio-control {
@@ -728,5 +797,10 @@ body {
 
     .photo-title {
         font-size: 12px;
+    }
+
+    .modal-frame-border {
+        padding: 15px;
+        border-width: 3px;
     }
 }

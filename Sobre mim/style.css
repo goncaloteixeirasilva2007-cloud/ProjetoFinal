@@ -6,6 +6,33 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+/* Efeito hover na navbar - igual à página principal */
+nav a {
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #45A29E;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: #45A29E;
+    transform: translateY(-2px);
+}
+
 /* Animações */
 @keyframes fadeInUp {
     from {
