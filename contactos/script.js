@@ -21,6 +21,7 @@ interactiveElements.forEach(element => {
     });
 });
 
+
 function animateCursor() {
     const diffX = mouseX - followerX;
     const diffY = mouseY - followerY;

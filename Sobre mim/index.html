@@ -5,142 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sobre Mim • Meu Museu Digital</title>
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+    
     <!-- Link para CSS externo -->
     <link rel="stylesheet" href="/Sobre mim/style.css">
 </head>
 
-<body class="bg-gradient-to-b from-[#dff8f6] to-[#fef6e4] text-[#1a1a1a] min-h-screen">
-
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
+<body>
+   
 
     <!-- Cursor customizado -->
-    <div class="cursor-follower" id="cursorFollower"></div>
-    <div id="cursor" 
-         class="fixed top-0 left-0 w-5 h-5 border-2 border-white rounded-full pointer-events-none z-[9999] 
-                -translate-x-1/2 -translate-y-1/2 transition-all duration-150 ease-out mix-blend-difference">
-    </div>
+     <div class="cursor-follower" id="cursorFollower"></div>
 
     <!-- HEADER -->
-    <header class="w-full bg-white/60 backdrop-blur border-b border-white/40 shadow-sm sticky top-0 z-20" id="header">
-        <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-6 lg:px-12">
-            <a href="/Sobre mim/index.html" class="flex items-center">
-                <img src="/img/G__1_-removebg-preview.png" class="h-12 mr-4 transition-transform hover:scale-110 hover:rotate-6" alt="Logo" id="logo" />
+    <header id="header">
+        <div class="header-container">
+            <a href="/Pagina-principsl/index.html mim/index.html" class="logo-link">
+                <img src="/img/G__1_-removebg-preview.png" class="logo" alt="Logo" id="logo" />
             </a>
             
             <!-- Hamburger Menu -->
-            <button class="hamburger md:hidden" id="hamburger">
+            <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
             <!-- Desktop Nav -->
-            <nav class="hidden md:flex space-x-8 font-semibold">
-                <a href="/Pagina-principsl/index.html" class="hover:text-[#45A29E] transition nav-link">Home</a>
-                <a href="/Sobre mim/index.html" class="hover:text-[#45A29E] transition nav-link">Sobre Mim</a>
-                <a href="/Museu/index.html" class="hover:text-[#45A29E] transition nav-link">Museu</a>
-                <a href="/contactos/index.html" class="hover:text-[#45A29E] transition nav-link">Contactos</a>
+            <nav>
+                <a href="/Pagina-principsl/index.html">Home</a>
+                <a href="/Sobre mim/index.html">Sobre Mim</a>
+                <a href="/Museu/index.html">Museu</a>
+                <a href="/contactos/index.html">Contactos</a>
             </nav>
         </div>
 
         <!-- Mobile Nav -->
-        <nav class="mobile-menu md:hidden bg-white/80 backdrop-blur" id="mobileMenu">
-            <div class="flex flex-col space-y-4 py-4 px-6">
-                <a href="index.html" class="hover:text-[#45A29E] transition">Home</a>
-                <a href="sobre.html" class="hover:text-[#45A29E] transition">Sobre Mim</a>
-                <a href="galeria.html" class="hover:text-[#45A29E] transition">Museu</a>
-                <a href="contactos.html" class="hover:text-[#45A29E] transition">Contactos</a>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-content">
+                <a href="/Pagina-principsl/index.html">Home</a>
+                <a href="/Sobre mim/index.html">Sobre Mim</a>
+                <a href="/Museu/index.html">Museu</a>
+                <a href="/contactos/index.html">Contactos</a>
             </div>
-        </nav>
+        </div>
     </header>
 
     <!-- SEÇÃO SOBRE -->
-    <section class="w-full py-20 px-6 md:px-12 relative" id="mainSection">
-
+    <section class="main-section" id="mainSection">
         <!-- Blobs decorativos -->
-        <div class="blob" id="blob1" style="width: 400px; height: 400px; background: #45A29E; top: 10%; left: -10%;"></div>
-        <div class="blob" id="blob2" style="width: 500px; height: 500px; background: #F18F01; bottom: 10%; right: -10%;"></div>
-        <div class="blob" id="blob3" style="width: 350px; height: 350px; background: #66B3AF; top: 50%; right: 5%;"></div>
-        <div class="blob" id="blob4" style="width: 300px; height: 300px; background: #FFB84D; top: 70%; left: 10%;"></div>
-        <div class="blob" id="blob5" style="width: 280px; height: 280px; background: #5DBEBE; bottom: 30%; left: 50%;"></div>
+        <div class="blob" id="blob1"></div>
+        <div class="blob" id="blob2"></div>
+        <div class="blob" id="blob3"></div>
+        <div class="blob" id="blob4"></div>
+        <div class="blob" id="blob5"></div>
 
-        <div class="max-w-6xl mx-auto relative z-10">
-
+        <div class="content-container">
             <!-- Título -->
-            <div class="mb-14 hidden-element" id="titleSection">
-                <span class="text-[#45A29E] font-semibold tracking-wide">SOBRE MIM</span>
-                <h1 class="title-font text-4xl md:text-5xl font-bold mt-2 gradient-text">
-                    Uma viagem pela minha arte
-                </h1>
+            <div class="title-section hidden-element" id="titleSection">
+                <span class="title-label">SOBRE MIM</span>
+                <h1 class="main-title">Uma viagem pela minha arte</h1>
             </div>
 
             <!-- Layout -->
-            <div class="flex flex-col lg:flex-row gap-12 items-start">
-
+            <div class="flex-container">
                 <!-- Imagem -->
-                <div class="w-full lg:w-1/2 relative hidden-element image-container" id="imageSection">
-                    <div class="absolute -top-6 -left-6 w-full h-full rounded-lg bg-[#45A29E] opacity-20 blur-2xl floating-element"></div>
-
-                    <img 
-                        src="img/foto-perfil.jpg"
-                        class="w-full rounded-xl shadow-2xl border border-white/60 backdrop-blur"
-                        alt="Eu"
-                        id="profileImage"
-                    >
+                <div class="image-section hidden-element" id="imageSection">
+                    <div class="image-bg"></div>
+                    <img src="/img/IMG_8130.jpeg" class="profile-image" alt="Eu" id="profileImage">
                 </div>
 
                 <!-- Cartões -->
-                <div class="w-full lg:w-1/2 flex flex-col gap-6" id="cardsContainer">
-
+                <div class="cards-container" id="cardsContainer">
                     <!-- CARD 1 -->
-                    <div class="p-6 rounded-xl bg-white/40 backdrop-blur-xl border border-white/50 shadow-lg card-hover hidden-element" data-card="1">
-                        <h3 class="title-font text-2xl mb-2 text-[#45A29E]">A minha essência</h3>
-                        <p class="leading-relaxed">
+                    <div class="card card1 hidden-element" data-card="1">
+                        <h3 class="card-title">A minha essência</h3>
+                        <p class="card-text">
                             Sou apaixonado por arte, cultura e expressão visual. Cada fotografia é uma história,
                             uma memória, uma emoção capturada no momento certo.
                         </p>
                     </div>
 
                     <!-- CARD 2 -->
-                    <div class="p-6 rounded-xl bg-gradient-to-r from-[#ffce8a] to-[#ffdcb3] shadow-lg border border-white/50 card-hover hidden-element" data-card="2">
-                        <h3 class="title-font text-2xl mb-2 text-[#7a4b00]">O meu museu digital</h3>
-                        <p class="leading-relaxed">
+                    <div class="card card2 hidden-element" data-card="2">
+                        <h3 class="card-title">O meu museu digital</h3>
+                        <p class="card-text">
                             Este espaço é a extensão do meu olhar artístico — um lugar onde partilho
                             tudo o que me inspira, me move e me define enquanto criador.
                         </p>
                     </div>
 
                     <!-- CARD 3 -->
-                    <div class="p-6 rounded-xl bg-white/40 backdrop-blur-xl border border-white/50 shadow-lg card-hover hidden-element" data-card="3">
-                        <h3 class="title-font text-2xl mb-2 text-[#45A29E]">A minha missão</h3>
-                        <p class="leading-relaxed">
+                    <div class="card card3 hidden-element" data-card="3">
+                        <h3 class="card-title">A minha missão</h3>
+                        <p class="card-text">
                             Quero proporcionar uma experiência imersiva, onde simplicidade,
                             emoção e estética caminham lado a lado para criar algo memorável.
                         </p>
                     </div>
-
                 </div>
             </div>
 
             <!-- Rodapé da secção -->
-            <div class="mt-16 text-center hidden-element" id="footerText">
-                <p class="text-lg font-semibold text-[#45A29E]">
-                    Obrigado por passares por esta galeria do meu mundo ✦
-                </p>
+            <div class="footer-text hidden-element" id="footerText">
+                <p>Obrigado por passares por esta galeria do meu mundo ✦</p>
             </div>
-
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="w-full bg-white/60 backdrop-blur border-t border-white/40 py-6 text-center text-sm">
+    <footer>
         © 2025 Meu Museu Digital. Todos os direitos reservados.
     </footer>
 

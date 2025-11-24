@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meu Museu Digital</title>
-    
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fontes -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    
-    <!-- Link para CSS externo -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Pagina-principsl/style.css">
 </head>
 <body>
@@ -20,18 +15,13 @@
         <div class="spinner"></div>
     </div>
 
-    <!-- Cursor customizado -->
+    <!-- Cursor Follower -->
     <div class="cursor-follower" id="cursorFollower"></div>
-    <div id="cursor" 
-         class="fixed top-0 left-0 w-5 h-5 border-2 border-white rounded-full pointer-events-none z-[9999] 
-                -translate-x-1/2 -translate-y-1/2 transition-all duration-150 ease-out mix-blend-difference">
-    </div>
 
+    <!-- Header -->
     <header id="header">
         <div class="logo">
-            <a href="/Pagina-principsl/index.html">
-                <img src="/img/G (1).png" alt="Logo do Meu Museu">
-            </a>
+            <img src="/img/G__1_-removebg-preview.png" alt="Logo">
         </div>
         <div class="menu-toggle" id="menuToggle">
             <span></span>
@@ -39,27 +29,25 @@
             <span></span>
         </div>
         <nav id="nav">
-            <a href="/Pagina-principsl/index.html">Home</a>
+            <a href="/Pagina-principsl/index.html">Home </a>
             <a href="/Sobre mim/index.html">Sobre Mim</a>
             <a href="/Museu/index.html">Museu</a>
-            <a href="/contactos.html">Contactos</a>
+            <a href="/contactos/index.html">Contactos</a>
         </nav>
     </header>
-      
-    <section class="hero" id="hero">
-        <h1 id="heroTitle">Bem-vindo ao Meu Museu Digital</h1>
-        <p id="heroText">Explore uma coleção única de arte, história e cultura</p>
-      <button class="enter" id="enterBtn" onclick="window.location.href='/Museu/index.html'">
-    Entrar no Museu
-</button>
 
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <h1 id="heroTitle">Bem-vindo ao Nosso Museu</h1>
+        <p>Descubra uma experiência única e inovadora</p>
+        <a href="/Museu/index.html" class="enter" id="enterBtn">Entrar</a>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Meu Museu Digital. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Link para JavaScript externo -->
     <script src="/Pagina-principsl/script.js"></script>
 </body>
 </html>

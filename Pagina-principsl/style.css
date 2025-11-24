@@ -124,7 +124,7 @@ nav a:hover {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
-/* HERO PRINCIPAL */
+/* HERO SECTION */
 .hero {
     flex: 1;
     display: flex;
@@ -139,7 +139,6 @@ nav a:hover {
     overflow: hidden;
 }
 
-/* Partículas de fundo animadas */
 .hero::before {
     content: '';
     position: absolute;
@@ -159,37 +158,54 @@ nav a:hover {
     100% { background-position: 50px 50px, 80px 80px, 100px 100px; }
 }
 
-/* Cursor customizado */
-/* ============= CURSOR CUSTOMIZADO ============= */
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    z-index: 1;
+    opacity: 0;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.6;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInUp 1.5s ease forwards 0.5s;
+}
+
+/* CURSOR FOLLOWER */
 .cursor-follower {
-    width: 20px;                    /* 🔧 Tamanho do cursor */
-    height: 20px;                   /* 🔧 Tamanho do cursor */
-    border: 2px solid var(--cor1);  /* 🔧 Cor da borda */
-    border-radius: 50%;             /* Formato circular */
-    position: fixed;                /* Fixa na tela */
-    pointer-events: none;           /* Não bloqueia cliques */
-    z-index: 9998;                  /* Fica acima de tudo */
-    transition: all 0.15s ease;     /* 🔧 Velocidade da transição */
-    mix-blend-mode: difference;     /* 🔧 Efeito de mistura */
-    opacity: 0;                     /* Invisível até mover o mouse */
-    background-color: transparent;  /* Fundo transparente */
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cor1);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    mix-blend-mode: difference;
+    opacity: 0;
+    background-color: transparent;
 }
 
-/* Cursor expandido ao passar por links/botões */
 .cursor-follower.expanded {
-    width: 50px;                    /* 🔧 Tamanho expandido */
-    height: 50px;                   /* 🔧 Tamanho expandido */
-    background-color: rgba(69, 162, 158, 0.2); /* 🔧 Cor de fundo */
+    width: 50px;
+    height: 50px;
+    background-color: rgba(69, 162, 158, 0.2);
 }
 
-/* Desativa em dispositivos touch (mobile) */
 @media (hover: none), (pointer: coarse) {
-    .cursor-follower { 
-        display: none !important; 
+    .cursor-follower {
+        display: none !important;
     }
 }
 
-/* BOTÃO PREMIUM */
+/* ENTER BUTTON */
 .enter {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
@@ -209,7 +225,7 @@ nav a:hover {
     background-size: 200% 200%;
     z-index: 1;
     opacity: 0;
-    animation: fadeInUp 2s ease forwards;
+    animation: fadeInUp 2s ease forwards 1s;
 }
 
 .enter::before {
@@ -242,7 +258,6 @@ nav a:hover {
     transform: scale(0.98);
 }
 
-/* Ondas animadas */
 .enter::after {
     content: '';
     position: absolute;
@@ -284,7 +299,7 @@ footer {
     border-top: 1px solid var(--cinza);
 }
 
-/* Loading Animation */
+/* LOADING */
 .loading {
     position: fixed;
     top: 0;
@@ -317,7 +332,7 @@ footer {
     to { transform: rotate(360deg); }
 }
 
-/* Partículas flutuantes */
+/* PARTICLES */
 .particle {
     position: absolute;
     background: rgba(255, 255, 255, 0.2);
@@ -331,7 +346,7 @@ footer {
     50% { transform: translateY(-30px) scale(1.1); opacity: 0.4; }
 }
 
-/* RESPONSIVO */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
     header {
         padding: 20px 30px;

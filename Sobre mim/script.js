@@ -1,13 +1,10 @@
-// ============= SCROLL PROGRESS BAR =============
-const scrollProgress = document.getElementById('scrollProgress');
+// ============================================
+// SCROLL PROGRESS BAR
+// ============================================
 
-window.addEventListener('scroll', () => {
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.scrollY / windowHeight) * 100;
-    scrollProgress.style.width = scrolled + '%';
-});
-
-// ============= HAMBURGER MENU =============
+// ============================================
+// HAMBURGER MENU
+// ============================================
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -16,7 +13,9 @@ hamburger.addEventListener('click', () => {
     mobileMenu.classList.toggle('active');
 });
 
-// ============= INTERSECTION OBSERVER - ANIMAÇÕES AO SCROLL =============
+// ============================================
+// INTERSECTION OBSERVER - ANIMAÇÕES AO SCROLL
+// ============================================
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -36,23 +35,54 @@ document.querySelectorAll('.hidden-element').forEach(el => {
     observer.observe(el);
 });
 
-const cursor = document.getElementById("cursor");
+// ============================================
+// CURSOR CUSTOMIZADO
+// ============================================
+const cursorFollower = document.getElementById('cursorFollower');
+let mouseX = 0, mouseY = 0;
+let followerX = 0, followerY = 0;
 
-// Movimento suave do cursor
-document.addEventListener("mousemove", (e) => {
-    cursor.style.top = e.clientY + "px";
-    cursor.style.left = e.clientX + "px";
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorFollower.style.opacity = '1';
 });
 
+// Expandir cursor ao passar por links e botões
+const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
+interactiveElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+        cursorFollower.classList.add('expanded');
+    });
+    
+    element.addEventListener('mouseleave', () => {
+        cursorFollower.classList.remove('expanded');
+    });
+});
+function animateCursor() {
+    const diffX = mouseX - followerX;
+    const diffY = mouseY - followerY;
+    
+    followerX += diffX * 0.1;
+    followerY += diffY * 0.1;
+    
+    cursorFollower.style.left = followerX + 'px';
+    cursorFollower.style.top = followerY + 'px';
+    
+    requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
 // Elementos interativos que ativam o hover
-const targets = document.querySelectorAll("a, button, input, textarea, select, .hover-target");
+const targets = document.querySelectorAll("a, button, input, textarea, select");
 
 targets.forEach(el => {
     el.addEventListener("mouseenter", () => {
-        cursor.classList.add("scale-150", "bg-white");
+        cursor.classList.add("scale-150");
     });
     el.addEventListener("mouseleave", () => {
-        cursor.classList.remove("scale-150", "bg-white");
+        cursor.classList.remove("scale-150");
     });
 });
 
@@ -65,7 +95,9 @@ document.addEventListener("mouseup", () => {
     cursor.classList.remove("scale-50");
 });
 
-// ============= ANIMAÇÃO ESPECIAL PARA CARDS =============
+// ============================================
+// ANIMAÇÃO ESPECIAL PARA CARDS
+// ============================================
 const cards = document.querySelectorAll('[data-card]');
 cards.forEach((card, index) => {
     setTimeout(() => {
@@ -73,7 +105,9 @@ cards.forEach((card, index) => {
     }, index * 200);
 });
 
-// ============= PARALLAX NO SCROLL =============
+// ============================================
+// PARALLAX NO SCROLL
+// ============================================
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const imageSection = document.getElementById('imageSection');
@@ -83,7 +117,9 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ============= CRIAR PARTÍCULAS INTERATIVAS =============
+// ============================================
+// CRIAR PARTÍCULAS INTERATIVAS
+// ============================================
 const mainSection = document.getElementById('mainSection');
 
 function createParticle(x, y) {
@@ -112,12 +148,3 @@ mainSection.addEventListener('mousemove', (e) => {
         lastParticleTime = now;
     }
 });
-
-// ============= EFEITO DE TYPING NO TÍTULO =============
-const title = document.querySelector('.gradient-text');
-const titleText = title.textContent;
-title.textContent = 'Uma caminhada pela arte Visual';
-
-let charIndex = 0;
-function typeWriter() {}
-   

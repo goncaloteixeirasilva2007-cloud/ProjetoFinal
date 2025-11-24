@@ -48,6 +48,7 @@ body {
     animation: float-particle 8s infinite ease-in-out;
 }
 
+
 @keyframes float-particle {
     0% {
         transform: translateY(100vh) translateX(0) scale(0);
@@ -164,7 +165,7 @@ nav a::after {
     height: 2px;
     bottom: -5px;
     left: 50%;
-    background: linear-gradient(90deg, var(--cor1), var(--cor2));
+    background: var(--cor1);
     transition: all 0.3s ease;
     transform: translateX(-50%);
 }

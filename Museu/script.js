@@ -2,14 +2,7 @@
    GALERIA DO MUSEU - JAVASCRIPT
    =============================================== */
 
-// ============= SCROLL PROGRESS BAR =============
-const scrollProgress = document.getElementById('scrollProgress');
 
-window.addEventListener('scroll', () => {
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.scrollY / windowHeight) * 100;
-    scrollProgress.style.width = scrolled + '%';
-});
 
 // ============= HAMBURGER MENU =============
 const hamburger = document.getElementById('hamburger');
@@ -30,6 +23,19 @@ document.addEventListener('mousemove', (e) => {
     mouseY = e.clientY;
     cursorFollower.style.opacity = '1';
 });
+
+// Expandir cursor ao passar por links e botões
+const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
+interactiveElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+        cursorFollower.classList.add('expanded');
+    });
+    
+    element.addEventListener('mouseleave', () => {
+        cursorFollower.classList.remove('expanded');
+    });
+});
+
 
 function animateCursor() {
     const diffX = mouseX - followerX;

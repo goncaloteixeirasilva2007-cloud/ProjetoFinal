@@ -1,4 +1,4 @@
-// Loading Screen
+// Loading screen
 window.addEventListener('load', () => {
     const loading = document.getElementById('loading');
     setTimeout(() => {
@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
     }, 1000);
 });
 
-// Menu Toggle Mobile
+// Menu toggle para mobile
 const menuToggle = document.getElementById('menuToggle');
 const nav = document.getElementById('nav');
 
@@ -15,7 +15,7 @@ menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('active');
 });
 
-// Header Scroll Effect
+// Header scroll effect
 const header = document.getElementById('header');
 let lastScroll = 0;
 
@@ -31,83 +31,50 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-const cursor = document.getElementById("cursor");
-
-// ============= CURSOR PERSONALIZADO =============
-
-// Seleciona o elemento do cursor
+// Cursor follower
 const cursorFollower = document.getElementById('cursorFollower');
 
-// Variáveis para armazenar a posição do mouse e do cursor
-let mouseX = 0, mouseY = 0;      // Posição real do mouse
-let followerX = 0, followerY = 0; // Posição do cursor visual
+let mouseX = 0, mouseY = 0;
+let followerX = 0, followerY = 0;
 
-// Detecta movimento do mouse
 document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;  // Posição X do mouse
-    mouseY = e.clientY;  // Posição Y do mouse
-    cursorFollower.style.opacity = '1'; // Torna o cursor visível
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorFollower.style.opacity = '1';
 });
 
-// Seleciona todos os elementos interativos (links, botões, cards)
-const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
+// Elementos interativos expandem o cursor
+const interactiveElements = document.querySelectorAll('a, button');
 
-// Para cada elemento interativo
 interactiveElements.forEach(element => {
-    // Quando o mouse ENTRA no elemento
     element.addEventListener('mouseenter', () => {
-        cursorFollower.classList.add('expanded'); // Expande o cursor
+        cursorFollower.classList.add('expanded');
     });
     
-    // Quando o mouse SAI do elemento
     element.addEventListener('mouseleave', () => {
-        cursorFollower.classList.remove('expanded'); // Volta ao tamanho normal
+        cursorFollower.classList.remove('expanded');
     });
 });
 
-// Função de animação suave do cursor
+// Animação suave do cursor
 function animateCursor() {
-    // Calcula a diferença entre a posição do mouse e do cursor
     const diffX = mouseX - followerX;
     const diffY = mouseY - followerY;
     
-    // Move o cursor 10% em direção ao mouse (efeito de "seguir")
-    followerX += diffX * 0.1; // 🔧 Mude 0.1 para mais rápido (0.2) ou mais lento (0.05)
+    followerX += diffX * 0.1;
     followerY += diffY * 0.1;
     
-    // Aplica a posição calculada
     cursorFollower.style.left = followerX + 'px';
     cursorFollower.style.top = followerY + 'px';
     
-    // Continua a animação em loop
     requestAnimationFrame(animateCursor);
 }
 
-// Inicia a animação do cursor
 animateCursor();
-// Elementos interativos que ativam o hover
-const targets = document.querySelectorAll("a, button, input, textarea, select, .hover-target");
 
-targets.forEach(el => {
-    el.addEventListener("mouseenter", () => {
-        cursor.classList.add("scale-150", "bg-white");
-    });
-    el.addEventListener("mouseleave", () => {
-        cursor.classList.remove("scale-150", "bg-white");
-    });
-});
-
-// Efeito de clique (encolhe)
-document.addEventListener("mousedown", () => {
-    cursor.classList.add("scale-50");
-});
-
-document.addEventListener("mouseup", () => {
-    cursor.classList.remove("scale-50");
-});
-
-// Criar partículas flutuantes no hero
+// Partículas flutuantes no hero
 const hero = document.getElementById('hero');
+
 function createParticle() {
     const particle = document.createElement('div');
     particle.className = 'particle';
@@ -129,7 +96,7 @@ function createParticle() {
 
 setInterval(createParticle, 300);
 
-// Efeito de digitação no título
+// Efeito de typewriter no título
 const heroTitle = document.getElementById('heroTitle');
 const titleText = heroTitle.textContent;
 heroTitle.textContent = '';
@@ -146,7 +113,7 @@ function typeWriter() {
 
 setTimeout(typeWriter, 500);
 
-// Parallax no hero
+// Parallax effect no hero
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroContent = document.querySelector('.hero');
@@ -155,6 +122,12 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Efeito ripple no botão Enter
+// Enter button functionality
 const enterBtn = document.getElementById('enterBtn');
-enterBtn.addEventListener 
+if (enterBtn) {
+    enterBtn.addEventListener('click', () => {
+        // Adiciona aqui o que queres que aconteça ao clicar no botão
+        console.log('Enter button clicked!');
+        // Exemplo: window.location.href = 'outra-pagina.html';
+    });
+}
