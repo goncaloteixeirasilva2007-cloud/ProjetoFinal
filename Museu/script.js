@@ -2,55 +2,79 @@
    GALERIA DO MUSEU - JAVASCRIPT
    =============================================== */
 
-
-
 // ============= HAMBURGER MENU =============
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-});
-
-// ============= CURSOR PERSONALIZADO (IGUAL ÀS OUTRAS PÁGINAS) =============
-const cursorFollower = document.getElementById('cursorFollower');
-let mouseX = 0, mouseY = 0;
-let followerX = 0, followerY = 0;
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursorFollower.style.opacity = '1';
-});
-
-// Expandir cursor ao passar por links e botões
-const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
-interactiveElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        cursorFollower.classList.add('expanded');
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     });
-    
-    element.addEventListener('mouseleave', () => {
-        cursorFollower.classList.remove('expanded');
+
+    // Fecha o menu ao clicar num link
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.style.overflow = '';
+        });
     });
-});
-
-
-function animateCursor() {
-    const diffX = mouseX - followerX;
-    const diffY = mouseY - followerY;
-    
-    followerX += diffX * 0.1;
-    followerY += diffY * 0.1;
-    
-    cursorFollower.style.left = followerX + 'px';
-    cursorFollower.style.top = followerY + 'px';
-    
-    requestAnimationFrame(animateCursor);
 }
 
-animateCursor();
+// ============= CURSOR PERSONALIZADO =============
+const cursorFollower = document.getElementById('cursorFollower');
+
+if (cursorFollower) {
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorFollower.style.opacity = '1';
+    });
+
+    // Esconde o cursor quando sai da janela
+    document.addEventListener('mouseleave', () => {
+        cursorFollower.style.opacity = '0';
+    });
+
+    // Mostra o cursor quando entra na janela
+    document.addEventListener('mouseenter', () => {
+        cursorFollower.style.opacity = '1';
+    });
+
+    // Expandir cursor ao passar por links, botões e cards
+    const interactiveElements = document.querySelectorAll('a, button, .photo-frame');
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursorFollower.classList.add('expanded');
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            cursorFollower.classList.remove('expanded');
+        });
+    });
+
+    // Animação suave do cursor
+    function animateCursor() {
+        const diffX = mouseX - followerX;
+        const diffY = mouseY - followerY;
+        
+        followerX += diffX * 0.15;
+        followerY += diffY * 0.15;
+        
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+}
 
 // ============= ÁUDIO AMBIENTE =============
 let audio = null;
@@ -58,64 +82,62 @@ let isPlaying = false;
 const audioToggle = document.getElementById('audioToggle');
 const audioIcon = document.getElementById('audioIcon');
 
-// Cria elemento de áudio com o caminho correto
 function initAudio() {
     audio = new Audio('audio/audiofundo.mp3');
     audio.loop = true;
     audio.volume = 0.3;
 }
 
-audioToggle.addEventListener('click', () => {
-    if (!audio) {
-        initAudio();
-    }
+if (audioToggle && audioIcon) {
+    audioToggle.addEventListener('click', () => {
+        if (!audio) {
+            initAudio();
+        }
 
-    if (isPlaying) {
-        audio.pause();
-        audioToggle.classList.add('muted');
-        audioIcon.innerHTML = `
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <line x1="23" y1="9" x2="17" y2="15"></line>
-            <line x1="17" y1="9" x2="23" y2="15"></line>
-        `;
-    } else {
-        audio.play().catch(err => {
-            console.log('Erro ao reproduzir áudio:', err);
-        });
-        audioToggle.classList.remove('muted');
-        audioIcon.innerHTML = `
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-        `;
-    }
-    
-    isPlaying = !isPlaying;
-});
+        if (isPlaying) {
+            audio.pause();
+            audioToggle.classList.add('muted');
+            audioIcon.innerHTML = `
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+            `;
+        } else {
+            audio.play().catch(err => {
+                console.log('Erro ao reproduzir áudio:', err);
+            });
+            audioToggle.classList.remove('muted');
+            audioIcon.innerHTML = `
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            `;
+        }
+        
+        isPlaying = !isPlaying;
+    });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const startAudio = () => {
-        if (!audio) initAudio();
-        audio.play();
-        isPlaying = true;
+    document.addEventListener('DOMContentLoaded', () => {
+        const startAudio = () => {
+            if (!audio) initAudio();
+            audio.play();
+            isPlaying = true;
 
-        // Muda o ícone para som ligado
-        audioToggle.classList.remove('muted');
-        audioIcon.innerHTML = `
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-        `;
+            audioToggle.classList.remove('muted');
+            audioIcon.innerHTML = `
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            `;
 
-        // remove listener para não repetir
-        document.removeEventListener('click', startAudio);
-        document.removeEventListener('mousemove', startAudio);
-    };
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('mousemove', startAudio);
+        };
 
-    // qualquer ação do utilizador ativa o áudio
-    document.addEventListener('click', startAudio);
-    document.addEventListener('mousemove', startAudio);
-});
+        document.addEventListener('click', startAudio);
+        document.addEventListener('mousemove', startAudio);
+    });
+}
 
 // ============= MODAL DE FOTO COM MOLDURA =============
 const photoModal = document.getElementById('photoModal');
@@ -128,7 +150,6 @@ const modalNext = document.getElementById('modalNext');
 let currentPhotoIndex = 0;
 let allPhotos = [];
 
-// Coleta todas as fotos
 function initGallery() {
     const photoFrames = document.querySelectorAll('.photo-frame');
     
@@ -138,7 +159,7 @@ function initGallery() {
         return;
     }
     
-    allPhotos = []; // Limpa o array
+    allPhotos = [];
     
     photoFrames.forEach((frame, index) => {
         const img = frame.querySelector('img');
@@ -151,7 +172,6 @@ function initGallery() {
                 title: title ? title.textContent : ''
             });
 
-            // Click para abrir modal
             frame.style.cursor = 'pointer';
             frame.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -165,7 +185,6 @@ function initGallery() {
     console.log(`✅ ${allPhotos.length} fotos carregadas!`);
 }
 
-// Inicializa quando o DOM estiver pronto
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initGallery);
 } else {
@@ -183,7 +202,6 @@ function openModal(index) {
     
     console.log('Abrindo modal com:', photo);
     
-    // Cria a imagem com a MESMA moldura de museu
     modalContent.innerHTML = `
         <div class="modal-frame-container">
             <div class="modal-frame-shadow"></div>
@@ -205,8 +223,10 @@ function openModal(index) {
 }
 
 function closeModal() {
-    photoModal.classList.remove('active');
-    document.body.style.overflow = '';
+    if (photoModal) {
+        photoModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 }
 
 function navigateModal(direction) {
@@ -220,7 +240,6 @@ function navigateModal(direction) {
     
     const photo = allPhotos[currentPhotoIndex];
     
-    // Atualiza a imagem mantendo a moldura
     modalContent.innerHTML = `
         <div class="modal-frame-container">
             <div class="modal-frame-shadow"></div>
@@ -231,24 +250,35 @@ function navigateModal(direction) {
         </div>
     `;
     
-    modalTitle.textContent = photo.title;
+    if (modalTitle) {
+        modalTitle.textContent = photo.title;
+    }
 }
 
 // Event listeners do modal
-modalClose.addEventListener('click', closeModal);
-modalPrev.addEventListener('click', () => navigateModal(-1));
-modalNext.addEventListener('click', () => navigateModal(1));
+if (modalClose) {
+    modalClose.addEventListener('click', closeModal);
+}
 
-// Fechar modal ao clicar fora
-photoModal.addEventListener('click', (e) => {
-    if (e.target === photoModal) {
-        closeModal();
-    }
-});
+if (modalPrev) {
+    modalPrev.addEventListener('click', () => navigateModal(-1));
+}
+
+if (modalNext) {
+    modalNext.addEventListener('click', () => navigateModal(1));
+}
+
+if (photoModal) {
+    photoModal.addEventListener('click', (e) => {
+        if (e.target === photoModal) {
+            closeModal();
+        }
+    });
+}
 
 // Navegação por teclado
 document.addEventListener('keydown', (e) => {
-    if (photoModal.classList.contains('active')) {
+    if (photoModal && photoModal.classList.contains('active')) {
         if (e.key === 'Escape') {
             closeModal();
         } else if (e.key === 'ArrowLeft') {
@@ -270,6 +300,7 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
@@ -292,7 +323,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ============= EFEITO DE SHAKE NO LOGO =============
-const logo = document.getElementById('logo');
+const logo = document.querySelector('.logo img');
 
 if (logo) {
     logo.addEventListener('mouseenter', function() {
@@ -321,7 +352,7 @@ if ('IntersectionObserver' in window) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.src = img.src; // Força o carregamento
+                img.src = img.src;
                 img.classList.add('loaded');
                 observer.unobserve(img);
             }
@@ -360,32 +391,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
+            
+            // Fecha o menu mobile se estiver aberto
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
     });
 });
-
-// ============= CONTADOR DE VISITANTES (OPCIONAL) =============
-let viewCount = localStorage.getItem('museumVisits') || 0;
-viewCount++;
-localStorage.setItem('museumVisits', viewCount);
-console.log(`Visita nº ${viewCount} ao museu! 🎨`);
-
-// ============= EASTER EGG: MODO NOTURNO EXTRA =============
-let clickCount = 0;
-const galleryTitle = document.querySelector('.gallery-title');
-
-if (galleryTitle) {
-    galleryTitle.addEventListener('click', () => {
-        clickCount++;
-        if (clickCount === 5) {
-            document.body.style.filter = 'invert(1) hue-rotate(180deg)';
-            setTimeout(() => {
-                document.body.style.filter = '';
-                clickCount = 0;
-            }, 3000);
-        }
-    });
-}
 
 // ============= INDICADOR DE CARREGAMENTO =============
 window.addEventListener('load', () => {
@@ -439,3 +454,5 @@ fadeStyle.textContent = `
     }
 `;
 document.head.appendChild(fadeStyle);
+
+console.log('✅ Script da Galeria do Museu carregado com sucesso!');

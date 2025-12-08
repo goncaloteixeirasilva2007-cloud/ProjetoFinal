@@ -47,33 +47,40 @@ function animateCursor() {
 
 animateCursor();
 
-// ============= MENU MOBILE =============
+// ============= MENU MOBILE - IGUAL À PÁGINA PRINCIPAL =============
 const menuToggle = document.getElementById('menuToggle');
 const nav = document.getElementById('nav');
 
 menuToggle.addEventListener('click', () => {
     nav.classList.toggle('active');
     menuToggle.classList.toggle('active');
+    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
 });
 
 // Fechar menu ao clicar em link
-const navLinks = nav.querySelectorAll('a');
+const navLinks = document.querySelectorAll('nav a');
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         nav.classList.remove('active');
         menuToggle.classList.remove('active');
+        document.body.style.overflow = '';
     });
 });
 
 // ============= HEADER SCROLL =============
 const header = document.getElementById('header');
+let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
+    
+    lastScroll = currentScroll;
 });
 
 // ============= ANIMAÇÃO DE PARTÍCULAS =============
@@ -153,7 +160,8 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observar os cards
-cards.forEach(card => {
+const allCards = document.querySelectorAll('.contacto-card');
+allCards.forEach(card => {
     observer.observe(card);
 });
 
@@ -208,28 +216,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ============= PARALLAX SUAVE NO SCROLL - MELHORADO =============
-let ticking = false;
-
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.contacto-card');
-            
-            parallaxElements.forEach((element, index) => {
-                const speed = 0.3 + (index * 0.05);
-                const yPos = -(scrolled * speed / 10);
-                element.style.transform = `translateY(${yPos}px)`;
-            });
-            
-            ticking = false;
-        });
-        
-        ticking = true;
-    }
-});
-
 // ============= SMOOTH SCROLL PARA LINKS INTERNOS =============
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -240,6 +226,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
+            
+            // Fecha o menu mobile se estiver aberto
+            if (nav && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
     });
 });

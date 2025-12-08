@@ -13,6 +13,17 @@ const nav = document.getElementById('nav');
 menuToggle.addEventListener('click', () => {
     nav.classList.toggle('active');
     menuToggle.classList.toggle('active');
+    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+});
+
+// Fecha o menu ao clicar num link
+const navLinks = document.querySelectorAll('nav a');
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+    });
 });
 
 // Header scroll effect

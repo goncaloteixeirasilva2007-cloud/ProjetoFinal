@@ -24,12 +24,10 @@ body {
     color: var(--preto);
     overflow-x: hidden;
     min-height: 100vh;
+    cursor: none; /* Esconde o cursor padrão */
 }
 
-/* ============= SCROLL PROGRESS BAR ============= */
-
-
-/* ============= CURSOR CUSTOMIZADO (IGUAL ÀS OUTRAS PÁGINAS) ============= */
+/* ============= CURSOR CUSTOMIZADO ============= */
 .cursor-follower {
     width: 20px;
     height: 20px;
@@ -42,6 +40,7 @@ body {
     mix-blend-mode: difference;
     opacity: 0;
     background-color: transparent;
+    transform: translate(-50%, -50%); /* Centraliza o cursor */
 }
 
 .cursor-follower.expanded {
@@ -50,10 +49,16 @@ body {
     background-color: rgba(69, 162, 158, 0.2);
 }
 
+/* Desativa em dispositivos touch */
 @media (hover: none), (pointer: coarse) {
-    .cursor-follower { display: none !important; }
+    .cursor-follower {
+        display: none !important;
+    }
+    
+    body {
+        cursor: auto !important;
+    }
 }
-
 
 /* ============= ILUMINAÇÃO DO MUSEU ============= */
 .museum-lighting {
@@ -103,17 +108,16 @@ body {
     position: sticky;
     top: 0;
     z-index: 20;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
-    max-width: 1400px;
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 48px;
+    padding: 1rem 1.5rem;
 }
 
 .logo {
@@ -123,7 +127,7 @@ body {
 
 .logo img {
     height: 48px;
-    margin-right: 16px;
+    margin-right: 1rem;
     transition: transform 0.3s ease;
 }
 
@@ -131,17 +135,49 @@ body {
     transform: scale(1.1) rotate(6deg);
 }
 
+/* ============= HAMBURGER MENU ============= */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #1a1a1a;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ============= NAVEGAÇÃO DESKTOP ============= */
 .nav-desktop {
     display: flex;
-    gap: 32px;
+    gap: 2rem;
     font-weight: 600;
 }
 
 .nav-link {
-    color: var(--preto);
-    text-decoration: none;
-    font-weight: 600;
     position: relative;
+    text-decoration: none;
+    color: #1a1a1a;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -152,7 +188,7 @@ body {
     height: 2px;
     bottom: -5px;
     left: 50%;
-    background-color: var(--cor1);
+    background-color: #45A29E;
     transition: all 0.3s ease;
     transform: translateX(-50%);
 }
@@ -164,71 +200,52 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--cor1);
+    color: #45A29E;
     transform: translateY(-2px);
 }
 
-/* Hamburger */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: var(--preto);
-    transition: all 0.3s ease;
-    display: block;
-    margin: 5px 0;
-}
-
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
+/* ============= MENU MOBILE ============= */
 .mobile-menu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow-y: auto;
 }
 
 .mobile-menu.active {
-    max-height: 300px;
+    right: 0;
 }
 
 .mobile-menu-content {
     display: flex;
     flex-direction: column;
-    padding: 16px 24px;
-    gap: 16px;
+    gap: 0;
+    padding: 100px 30px 30px;
 }
 
 .mobile-menu-content a {
-    color: var(--preto);
     text-decoration: none;
+    color: #1a1a1a;
+    transition: all 0.3s ease;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
     font-weight: 600;
-    transition: color 0.3s ease;
 }
 
-.mobile-menu-content a:hover,
-.mobile-menu-content a.active {
-    color: var(--cor1);
+.mobile-menu-content a:hover {
+    color: #45A29E;
+    background: rgba(69, 162, 158, 0.1);
+    transform: translateX(5px);
 }
 
 /* ============= CONTROLE DE ÁUDIO ============= */
@@ -271,7 +288,7 @@ body {
 /* ============= GALERIA PRINCIPAL ============= */
 .gallery-section {
     position: relative;
-    padding: 80px 20px;
+    padding: 5rem 1.5rem;
     z-index: 2;
 }
 
@@ -282,22 +299,21 @@ body {
 
 .gallery-header {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 5rem;
     animation: fadeInUp 1s ease;
 }
 
 .gallery-subtitle {
     color: var(--cor1);
     font-weight: 600;
-    letter-spacing: 3px;
-    font-size: 14px;
+    letter-spacing: 0.05em;
 }
 
 .gallery-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 56px;
-    font-weight: 700;
-    margin: 20px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 1.25rem 0;
     background: linear-gradient(90deg, #45A29E, #F18F01, #45A29E);
     background-size: 200% 100%;
     -webkit-background-clip: text;
@@ -306,26 +322,17 @@ body {
     animation: gradient-shift 3s ease infinite;
 }
 
-@keyframes gradient-shift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
 .gallery-description {
-    font-size: 18px;
+    font-size: 1.125rem;
     color: rgba(26, 26, 26, 0.7);
     max-width: 700px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.625;
 }
 
 /* ============= SÉRIES ============= */
 .series-section {
-    margin-bottom: 120px;
+    margin-bottom: 7.5rem;
     opacity: 0;
     transform: translateY(50px);
     animation: fadeInUp 0.8s ease forwards;
@@ -337,19 +344,19 @@ body {
 
 .series-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 3.75rem;
 }
 
 .series-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
+    font-family: 'Inter', sans-serif;
+    font-size: 2.625rem;
     color: var(--preto);
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
 }
 
 .series-description {
     color: rgba(26, 26, 26, 0.6);
-    font-size: 16px;
+    font-size: 1rem;
     font-style: italic;
 }
 
@@ -357,8 +364,8 @@ body {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    padding: 20px;
+    gap: 2.5rem;
+    padding: 1.25rem;
 }
 
 /* ============= MOLDURAS DAS FOTOS ============= */
@@ -384,7 +391,6 @@ body {
     z-index: 10;
 }
 
-/* Sombra da moldura */
 .frame-shadow {
     position: absolute;
     top: 0;
@@ -403,10 +409,9 @@ body {
     opacity: 0.8;
 }
 
-/* Borda do quadro (estilo clássico de museu) */
 .frame-border {
     position: relative;
-    padding: 20px;
+    padding: 1.25rem;
     background: linear-gradient(145deg, #8b7355, #5c4a3a);
     border: 3px solid #d4af37;
     box-shadow: 
@@ -444,7 +449,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Spotlight effect */
 .frame-spotlight {
     position: absolute;
     top: -50%;
@@ -466,14 +470,13 @@ body {
     opacity: 1;
 }
 
-/* Info da foto */
 .photo-info {
     position: absolute;
     bottom: 25px;
     left: 25px;
     right: 25px;
     background: rgba(0, 0, 0, 0.85);
-    padding: 12px 15px;
+    padding: 0.75rem 0.9375rem;
     transform: translateY(100%);
     opacity: 0;
     transition: all 0.4s ease;
@@ -486,7 +489,7 @@ body {
 }
 
 .photo-title {
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--branco);
     display: block;
@@ -525,7 +528,6 @@ body {
     animation: modalZoom 0.5s ease;
 }
 
-/* Moldura do modal - IGUAL à galeria mas maior */
 .modal-frame-container {
     position: relative;
     display: flex;
@@ -547,7 +549,7 @@ body {
 
 .modal-frame-border {
     position: relative;
-    padding: 30px;
+    padding: 1.875rem;
     background: linear-gradient(145deg, #8b7355, #5c4a3a);
     border: 5px solid #d4af37;
     box-shadow: 
@@ -598,22 +600,22 @@ body {
 
 .modal-info {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 2.5rem;
     position: relative;
     width: 100%;
 }
 
 .modal-info h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
     color: var(--branco);
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .modal-close {
     position: absolute;
     top: 30px;
     right: 30px;
-    font-size: 40px;
+    font-size: 2.5rem;
     color: var(--branco);
     background: none;
     border: none;
@@ -636,7 +638,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 60px;
+    font-size: 3.75rem;
     color: var(--branco);
     background: rgba(0, 0, 0, 0.5);
     border: none;
@@ -662,11 +664,10 @@ body {
     width: 100%;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
-    color: var(--preto);
-    text-align: center;
-    padding: 25px 20px;
-    font-size: 14px;
     border-top: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
 }
 
 /* ============= ANIMAÇÕES ============= */
@@ -703,56 +704,101 @@ body {
     }
 }
 
-/* ============= RESPONSIVO ============= */
-@media (max-width: 1200px) {
-    .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
     }
 }
 
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
+/* ============= RESPONSIVO ============= */
+
+/* Tablet */
+@media (min-width: 768px) {
+    .gallery-title {
+        font-size: 3rem;
     }
 
+    .hamburger {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
     .nav-desktop {
         display: none;
     }
 
-    .header-container {
-        padding: 16px 24px;
-    }
-
-    .gallery-title {
-        font-size: 36px;
-    }
-
-    .series-title {
-        font-size: 28px;
+    .hamburger {
+        display: flex;
     }
 
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 10px;
-    }
-
-    .frame-border {
-        padding: 12px;
+        gap: 1.5rem;
+        padding: 0.75rem;
     }
 
     .frame-border img {
         height: 200px;
     }
 
+    .series-title {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .mobile-menu {
+        width: 100%;
+    }
+
+    .mobile-menu-content a {
+        font-size: 1.05rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .frame-border {
+        padding: 0.75rem;
+    }
+
+    .frame-border img {
+        height: 150px;
+    }
+
+    .gallery-title {
+        font-size: 1.75rem;
+    }
+
+    .series-title {
+        font-size: 1.5rem;
+    }
+
+    .photo-info {
+        padding: 0.5rem 0.625rem;
+    }
+
+    .photo-title {
+        font-size: 0.75rem;
+    }
+
     .modal-frame-border {
-        padding: 20px;
+        padding: 0.9375rem;
+        border-width: 3px;
     }
 
     .modal-frame-border img {
         max-width: 90vw;
         max-height: 60vh;
+        width: auto;
+        height: auto;
     }
 
     .audio-control {
@@ -768,37 +814,26 @@ body {
     .modal-nav {
         width: 40px;
         height: 40px;
-        font-size: 40px;
+        font-size: 2.5rem;
     }
 
     .modal-prev { left: 10px; }
     .modal-next { right: 10px; }
+
+    .modal-close {
+        font-size: 2rem;
+        width: 40px;
+        height: 40px;
+    }
 }
 
-@media (max-width: 480px) {
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+/* Desktop Grande */
+@media (min-width: 1024px) {
+    .header-container {
+        padding: 1rem 3rem;
     }
 
-    .frame-border img {
-        height: 150px;
-    }
-
-    .gallery-title {
-        font-size: 28px;
-    }
-
-    .photo-info {
-        padding: 8px 10px;
-    }
-
-    .photo-title {
-        font-size: 12px;
-    }
-
-    .modal-frame-border {
-        padding: 15px;
-        border-width: 3px;
+    .gallery-section {
+        padding: 5rem 3rem;
     }
 }

@@ -66,6 +66,7 @@ header .logo img:hover {
 nav {
     display: flex;
     align-items: center;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 nav a {
@@ -103,6 +104,8 @@ nav a:hover {
     flex-direction: column;
     cursor: pointer;
     gap: 5px;
+    z-index: 1001;
+    padding: 5px;
 }
 
 .menu-toggle span {
@@ -113,7 +116,7 @@ nav a:hover {
 }
 
 .menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg) translate(8px, 8px);
 }
 
 .menu-toggle.active span:nth-child(2) {
@@ -121,7 +124,7 @@ nav a:hover {
 }
 
 .menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
+    transform: rotate(-45deg) translate(7px, -7px);
 }
 
 /* HERO SECTION */
@@ -362,26 +365,42 @@ footer {
     }
 
     nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--branco);
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 280px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: 20px 0;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
+        padding: 100px 30px 30px;
+        gap: 0;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     nav.active {
-        max-height: 300px;
+        right: 0;
     }
 
     nav a {
-        margin: 10px 0;
-        margin-left: 0;
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 12px;
+        margin: 0 0 0.5rem 0;
+        text-align: left;
+        color: var(--preto);
+    }
+
+    nav a::after {
+        display: none;
+    }
+
+    nav a:hover {
+        background: rgba(69, 162, 158, 0.1);
+        transform: translateX(5px);
     }
 
     .hero h1 {
@@ -393,5 +412,23 @@ footer {
     .enter {
         font-size: 18px;
         padding: 14px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        width: 100%;
+    }
+
+    nav a {
+        font-size: 1.05rem;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    nav a {
+        margin-left: 15px;
+        font-size: 0.9rem;
     }
 }
