@@ -9,7 +9,17 @@ document.addEventListener('mousemove', (e) => {
     cursorFollower.style.opacity = '1';
 });
 
-// Expandir cursor ao passar por links e botões
+// Esconde o cursor quando sai da janela
+document.addEventListener('mouseleave', () => {
+    cursorFollower.style.opacity = '0';
+});
+
+// Mostra o cursor quando entra na janela
+document.addEventListener('mouseenter', () => {
+    cursorFollower.style.opacity = '1';
+});
+
+// Expandir cursor ao passar por elementos interativos
 const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
 interactiveElements.forEach(element => {
     element.addEventListener('mouseenter', () => {
@@ -21,13 +31,13 @@ interactiveElements.forEach(element => {
     });
 });
 
-
+// Animação suave do cursor
 function animateCursor() {
     const diffX = mouseX - followerX;
     const diffY = mouseY - followerY;
     
-    followerX += diffX * 0.1;
-    followerY += diffY * 0.1;
+    followerX += diffX * 0.15;
+    followerY += diffY * 0.15;
     
     cursorFollower.style.left = followerX + 'px';
     cursorFollower.style.top = followerY + 'px';
@@ -147,11 +157,12 @@ cards.forEach(card => {
     observer.observe(card);
 });
 
-// ============= EFEITO DE RIPPLE NOS BOTÕES =============
+// ============= EFEITO DE ONDULAÇÃO SUAVE NOS BOTÕES =============
 const buttons = document.querySelectorAll('.contacto-link');
 
 buttons.forEach(button => {
     button.addEventListener('click', function(e) {
+        // Cria uma ondulação suave
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -171,7 +182,7 @@ buttons.forEach(button => {
     });
 });
 
-// CSS para efeito ripple (injetado via JS)
+// CSS para efeito ripple suave
 const style = document.createElement('style');
 style.textContent = `
     .contacto-link {
@@ -182,7 +193,7 @@ style.textContent = `
     .ripple-effect {
         position: absolute;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.4);
         transform: scale(0);
         animation: ripple-animation 0.6s ease-out;
         pointer-events: none;
@@ -190,53 +201,51 @@ style.textContent = `
     
     @keyframes ripple-animation {
         to {
-            transform: scale(4);
+            transform: scale(2.5);
             opacity: 0;
         }
     }
 `;
 document.head.appendChild(style);
 
-// ============= ANIMAÇÃO DOS ÍCONES =============
-const icons = document.querySelectorAll('.contacto-icon');
+// ============= PARALLAX SUAVE NO SCROLL - MELHORADO =============
+let ticking = false;
 
-// Adicionar animação de rotação suave contínua
-icons.forEach((icon, index) => {
-    setInterval(() => {
-        icon.style.animation = 'none';
-        setTimeout(() => {
-            icon.style.animation = 'pulse 2s ease infinite';
-        }, 10);
-    }, 4000 + (index * 500));
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.contacto-card');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.3 + (index * 0.05);
+                const yPos = -(scrolled * speed / 10);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+            
+            ticking = false;
+        });
+        
+        ticking = true;
+    }
 });
 
-// ============= PARALLAX SUAVE NO SCROLL =============
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.contacto-card');
-    
-    parallaxElements.forEach((element, index) => {
-        const speed = 0.5 + (index * 0.1);
-        const yPos = -(scrolled * speed / 10);
-        element.style.transform = `translateY(${yPos}px)`;
+// ============= SMOOTH SCROLL PARA LINKS INTERNOS =============
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     });
 });
 
-// ============= CONTADOR DE ANIMAÇÃO (OPCIONAL) =============
-// Adicionar números animados se houver estatísticas
-function animateValue(element, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        element.textContent = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
 // ============= LOG DE BOAS-VINDAS =============
-console.log('%c👋 Olá! Bem-vindo ao meu portfolio!', 'color: #45A29E; font-size: 20px; font-weight: bold;');
-console.log('%c💼 Entre em contacto comigo!', 'color: #F18F01; font-size: 14px;');
+console.log('%c👋 Olá! Bem-vindo à página de contactos!', 'color: #45A29E; font-size: 20px; font-weight: bold;');
+console.log('%c💼 Entre em contacto comigo através dos canais disponíveis!', 'color: #F18F01; font-size: 14px;');
+
+console.log('✅ Script de contactos carregado com sucesso!');

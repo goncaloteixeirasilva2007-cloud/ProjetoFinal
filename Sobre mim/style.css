@@ -1,4 +1,16 @@
 /* ============================================
+   VARIÁVEIS CSS (ADICIONA NO INÍCIO DO FICHEIRO)
+   ============================================ */
+:root {
+    --cor1: #45A29E;
+    --cor2: #F18F01;
+    --cor3: #E0E0E0;
+    --preto: #111111;
+    --branco: #ffffff;
+    --cinza: #dadada;
+}
+
+/* ============================================
    RESET E BASE
    ============================================ */
 * {
@@ -13,12 +25,11 @@ body {
     background: linear-gradient(to bottom, #dff8f6, #fef6e4);
     color: #1a1a1a;
     min-height: 100vh;
+    cursor: none; /* Esconde o cursor padrão */
 }
 
-
-
 /* ============================================
-   CURSOR CUSTOMIZADO
+   CURSOR FOLLOWER - CORRIGIDO
    ============================================ */
 .cursor-follower {
     width: 20px;
@@ -32,6 +43,7 @@ body {
     mix-blend-mode: difference;
     opacity: 0;
     background-color: transparent;
+    transform: translate(-50%, -50%); /* Centraliza o cursor */
 }
 
 .cursor-follower.expanded {
@@ -40,8 +52,15 @@ body {
     background-color: rgba(69, 162, 158, 0.2);
 }
 
+/* Desativa em dispositivos touch */
 @media (hover: none), (pointer: coarse) {
-    .cursor-follower { display: none !important; }
+    .cursor-follower {
+        display: none !important;
+    }
+    
+    body {
+        cursor: auto !important;
+    }
 }
 
 /* ============================================

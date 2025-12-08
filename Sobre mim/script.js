@@ -1,17 +1,70 @@
 // ============================================
-// SCROLL PROGRESS BAR
-// ============================================
-
-// ============================================
 // HAMBURGER MENU
 // ============================================
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-});
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    });
+}
+
+// ============================================
+// CURSOR FOLLOWER - CORRIGIDO E OTIMIZADO
+// ============================================
+const cursorFollower = document.getElementById('cursorFollower');
+
+if (cursorFollower) {
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorFollower.style.opacity = '1';
+    });
+
+    // Esconde o cursor quando sai da janela
+    document.addEventListener('mouseleave', () => {
+        cursorFollower.style.opacity = '0';
+    });
+
+    // Mostra o cursor quando entra na janela
+    document.addEventListener('mouseenter', () => {
+        cursorFollower.style.opacity = '1';
+    });
+
+    // Elementos interativos expandem o cursor - CORRIGIDO
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .card');
+
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursorFollower.classList.add('expanded');
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            cursorFollower.classList.remove('expanded');
+        });
+    });
+
+    // Animação suave do cursor
+    function animateCursor() {
+        const diffX = mouseX - followerX;
+        const diffY = mouseY - followerY;
+        
+        followerX += diffX * 0.15;
+        followerY += diffY * 0.15;
+        
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+}
 
 // ============================================
 // INTERSECTION OBSERVER - ANIMAÇÕES AO SCROLL
@@ -36,67 +89,7 @@ document.querySelectorAll('.hidden-element').forEach(el => {
 });
 
 // ============================================
-// CURSOR CUSTOMIZADO
-// ============================================
-const cursorFollower = document.getElementById('cursorFollower');
-let mouseX = 0, mouseY = 0;
-let followerX = 0, followerY = 0;
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursorFollower.style.opacity = '1';
-});
-
-// Expandir cursor ao passar por links e botões
-const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
-interactiveElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        cursorFollower.classList.add('expanded');
-    });
-    
-    element.addEventListener('mouseleave', () => {
-        cursorFollower.classList.remove('expanded');
-    });
-});
-function animateCursor() {
-    const diffX = mouseX - followerX;
-    const diffY = mouseY - followerY;
-    
-    followerX += diffX * 0.1;
-    followerY += diffY * 0.1;
-    
-    cursorFollower.style.left = followerX + 'px';
-    cursorFollower.style.top = followerY + 'px';
-    
-    requestAnimationFrame(animateCursor);
-}
-
-animateCursor();
-
-// Elementos interativos que ativam o hover
-const targets = document.querySelectorAll("a, button, input, textarea, select");
-
-targets.forEach(el => {
-    el.addEventListener("mouseenter", () => {
-        cursor.classList.add("scale-150");
-    });
-    el.addEventListener("mouseleave", () => {
-        cursor.classList.remove("scale-150");
-    });
-});
-
-// Efeito de clique (encolhe)
-document.addEventListener("mousedown", () => {
-    cursor.classList.add("scale-50");
-});
-
-document.addEventListener("mouseup", () => {
-    cursor.classList.remove("scale-50");
-});
-
-// ============================================
-// ANIMAÇÃO ESPECIAL PARA CARDS
+// ANIMAÇÃO ESPECIAL PARA CARDS COM DELAY
 // ============================================
 const cards = document.querySelectorAll('[data-card]');
 cards.forEach((card, index) => {
@@ -113,8 +106,15 @@ window.addEventListener('scroll', () => {
     const imageSection = document.getElementById('imageSection');
     
     if (imageSection) {
-        imageSection.style.transform = `translateY(${scrolled * 0.1}px)`;
+        imageSection.style.transform = `translateY(${scrolled * 0.05}px)`;
     }
+
+    // Parallax nos blobs
+    const blobs = document.querySelectorAll('.blob');
+    blobs.forEach((blob, index) => {
+        const speed = (index + 1) * 0.03;
+        blob.style.transform = `translateY(${scrolled * speed}px)`;
+    });
 });
 
 // ============================================
@@ -122,29 +122,66 @@ window.addEventListener('scroll', () => {
 // ============================================
 const mainSection = document.getElementById('mainSection');
 
-function createParticle(x, y) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = x + 'px';
-    particle.style.top = y + 'px';
-    
-    const tx = (Math.random() - 0.5) * 200;
-    const ty = (Math.random() - 0.5) * 200;
-    
-    particle.style.setProperty('--tx', tx + 'px');
-    particle.style.setProperty('--ty', ty + 'px');
-    
-    mainSection.appendChild(particle);
-    
-    setTimeout(() => particle.remove(), 4000);
+if (mainSection) {
+    function createParticle(x, y) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        
+        const tx = (Math.random() - 0.5) * 200;
+        const ty = (Math.random() - 0.5) * 200;
+        
+        particle.style.setProperty('--tx', tx + 'px');
+        particle.style.setProperty('--ty', ty + 'px');
+        
+        mainSection.appendChild(particle);
+        
+        setTimeout(() => particle.remove(), 4000);
+    }
+
+    // Criar partículas ao mover o mouse (com throttle)
+    let lastParticleTime = 0;
+    mainSection.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastParticleTime > 100) {
+            createParticle(e.pageX, e.pageY);
+            lastParticleTime = now;
+        }
+    });
 }
 
-// Criar partículas ao mover o mouse
-let lastParticleTime = 0;
-mainSection.addEventListener('mousemove', (e) => {
-    const now = Date.now();
-    if (now - lastParticleTime > 100) {
-        createParticle(e.pageX, e.pageY);
-        lastParticleTime = now;
-    }
+// ============================================
+// SMOOTH SCROLL PARA LINKS INTERNOS
+// ============================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });
+
+// ============================================
+// PERFORMANCE: LAZY LOADING PARA IMAGENS
+// ============================================
+const images = document.querySelectorAll('img[data-src]');
+const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            imageObserver.unobserve(img);
+        }
+    });
+});
+
+images.forEach(img => imageObserver.observe(img));
+
+console.log('✅ Script da página Sobre Mim carregado com sucesso!');
