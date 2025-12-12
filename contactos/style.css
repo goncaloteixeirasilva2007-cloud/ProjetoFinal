@@ -1,8 +1,11 @@
+/* ===============================================
+   CONTACTOS - CSS
+   =============================================== */
+
 :root {
     --cor1: #45A29E;
     --cor2: #F18F01;
-    --cor3: #E0E0E0;
-    --preto: #111111;
+    --preto: #1a1a1a;
     --branco: #ffffff;
     --cinza: #dadada;
 }
@@ -13,57 +16,13 @@
     padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom, #dff8f6, #fef6e4);
     color: var(--preto);
-    background: linear-gradient(135deg, #dff8f6 0%, #fef6e4 100%);
-    min-height: 100vh;
     overflow-x: hidden;
-    position: relative;
+    min-height: 100vh;
     cursor: none;
-}
-
-/* ============= PARTÍCULAS DE FUNDO ============= */
-.particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: var(--cor1);
-    border-radius: 50%;
-    opacity: 0;
-    animation: float-particle 8s infinite ease-in-out;
-}
-
-@keyframes float-particle {
-    0% {
-        transform: translateY(100vh) translateX(0) scale(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(-100vh) translateX(100px) scale(1);
-        opacity: 0;
-    }
 }
 
 /* ============= CURSOR CUSTOMIZADO ============= */
@@ -89,442 +48,402 @@ body {
 }
 
 @media (hover: none), (pointer: coarse) {
-    .cursor-follower { 
-        display: none !important; 
+    .cursor-follower {
+        display: none !important;
     }
+    
     body {
         cursor: auto !important;
     }
 }
 
 /* ============= HEADER ============= */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.header {
     width: 100%;
-    padding: 20px 50px;
-    background: var(--branco);
-    border-bottom: 1px solid var(--cinza);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     position: sticky;
     top: 0;
-    z-index: 10;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
+    z-index: 20;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-header.scrolled {
-    padding: 15px 50px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+.header-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
 }
 
-header .logo {
+.logo {
     display: flex;
     align-items: center;
 }
 
-header .logo img {
-    height: 50px;
-    display: block;
-    margin-right: 20px;
+.logo img {
+    height: 48px;
+    margin-right: 1rem;
     transition: transform 0.3s ease;
 }
 
-header .logo img:hover {
-    transform: scale(1.05) rotate(5deg);
+.logo img:hover {
+    transform: scale(1.1) rotate(6deg);
 }
 
-nav {
-    display: flex;
-    align-items: center;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-nav a {
-    margin-left: 25px;
-    text-decoration: none;
-    color: var(--preto);
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    letter-spacing: 0.3px;
-}
-
-nav a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(69, 162, 158, 0.1), rgba(241, 143, 1, 0.1));
-    border-radius: 0.5rem;
-    opacity: 0;
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0.35rem;
-    left: 50%;
-    background: linear-gradient(90deg, var(--cor1), var(--cor2));
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-nav a:hover::before {
-    opacity: 1;
-}
-
-nav a:hover::after {
-    width: calc(100% - 2rem);
-}
-
-nav a:hover {
-    color: var(--cor1);
-    transform: translateY(-2px);
-    text-shadow: 0 2px 8px rgba(69, 162, 158, 0.2);
-}
-
-.menu-toggle {
+/* ============= HAMBURGER MENU ============= */
+.hamburger {
     display: none;
     flex-direction: column;
+    background: none;
+    border: none;
     cursor: pointer;
-    gap: 5px;
     z-index: 1001;
     padding: 5px;
 }
 
-.menu-toggle span {
+.hamburger span {
+    display: block;
     width: 25px;
     height: 3px;
-    background: var(--preto);
+    background: #1a1a1a;
+    margin: 5px 0;
     transition: all 0.3s ease;
 }
 
-.menu-toggle.active span:nth-child(1) {
+.hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(8px, 8px);
 }
 
-.menu-toggle.active span:nth-child(2) {
+.hamburger.active span:nth-child(2) {
     opacity: 0;
 }
 
-.menu-toggle.active span:nth-child(3) {
+.hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
-/* ============= SEÇÃO DE CONTACTOS ============= */
-.contactos-section {
-    min-height: calc(100vh - 150px);
+/* ============= NAVEGAÇÃO DESKTOP ============= */
+.nav-desktop {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 80px 20px;
-    position: relative;
-    z-index: 1;
+    gap: 2rem;
+    font-weight: 600;
 }
 
-.contactos-container {
-    max-width: 1200px;
+.nav-link {
+    position: relative;
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #45A29E;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
     width: 100%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #45A29E;
+    transform: translateY(-2px);
+}
+
+/* ============= MENU MOBILE ============= */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 100px 30px 30px;
+}
+
+.mobile-menu-content a {
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: all 0.3s ease;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.mobile-menu-content a:hover {
+    color: #45A29E;
+    background: rgba(69, 162, 158, 0.1);
+    transform: translateX(5px);
+}
+
+/* ============= SEÇÃO DE CONTACTOS ============= */
+.contact-section {
+    position: relative;
+    padding: 5rem 1.5rem;
+    z-index: 2;
+    min-height: calc(100vh - 200px);
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-header {
     text-align: center;
+    margin-bottom: 4rem;
     animation: fadeInUp 1s ease;
 }
 
-.contactos-header {
-    margin-bottom: 60px;
-}
-
-.contactos-subtitle {
+.contact-subtitle {
     color: var(--cor1);
     font-weight: 600;
-    letter-spacing: 3px;
-    font-size: 14px;
-    text-transform: uppercase;
-    animation: fadeIn 0.8s ease;
-    opacity: 0;
-    animation-fill-mode: forwards;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
 }
 
-.contactos-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 56px;
-    font-weight: 700;
-    margin: 20px 0;
+.contact-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 1.25rem 0;
     background: linear-gradient(90deg, #45A29E, #F18F01, #45A29E);
     background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradient-shift 3s ease infinite, titleBounce 1s ease 0.2s;
+    animation: gradient-shift 3s ease infinite;
 }
 
-@keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-@keyframes titleBounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.contactos-description {
-    font-size: 18px;
+.contact-description {
+    font-size: 1.125rem;
     color: rgba(26, 26, 26, 0.7);
-    max-width: 600px;
-    margin: 0 auto 60px;
-    line-height: 1.6;
-    animation: fadeInUp 1s ease 0.4s;
-    opacity: 0;
-    animation-fill-mode: forwards;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.625;
 }
 
-/* ============= CARTÕES DE CONTACTO ============= */
-.contactos-grid {
+/* ============= GRID DE CONTACTOS ============= */
+.contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
-    margin-bottom: 60px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
 }
 
-.contacto-card {
-    background: var(--branco);
-    padding: 40px 30px;
+.contact-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.5);
     animation: fadeInScale 0.8s ease forwards;
     opacity: 0;
-    cursor: pointer;
 }
 
-.contacto-card:nth-child(1) { animation-delay: 0.1s; }
-.contacto-card:nth-child(2) { animation-delay: 0.2s; }
-.contacto-card:nth-child(3) { animation-delay: 0.3s; }
-.contacto-card:nth-child(4) { animation-delay: 0.4s; }
+.contact-card:nth-child(1) { animation-delay: 0.1s; }
+.contact-card:nth-child(2) { animation-delay: 0.2s; }
+.contact-card:nth-child(3) { animation-delay: 0.3s; }
 
-.contacto-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--cor1), var(--cor2));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(69, 162, 158, 0.2);
 }
 
-.contacto-card:hover::before {
-    transform: scaleX(1);
-}
-
-.card-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(69, 162, 158, 0.3), transparent 70%);
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.6s ease;
-    pointer-events: none;
-    border-radius: 20px;
-}
-
-.contacto-card:hover .card-glow {
-    transform: translate(-50%, -50%) scale(1.5);
-}
-
-.contacto-card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(69, 162, 158, 0.4);
-}
-
-.contacto-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 20px;
+.contact-icon {
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, var(--cor1), var(--cor2));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--branco);
-    font-size: 32px;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 5px 15px rgba(69, 162, 158, 0.3);
-    position: relative;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
 }
 
-.contacto-icon::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--cor1), var(--cor2));
-    z-index: -1;
+.contact-card:hover .contact-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.contact-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: white;
+}
+
+.contact-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--preto);
+}
+
+.contact-card p {
+    color: rgba(26, 26, 26, 0.7);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.contact-card a {
+    color: var(--cor1);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    word-break: break-all;
+}
+
+.contact-card a:hover {
+    color: var(--cor2);
+}
+
+/* ============= FORMULÁRIO DE CONTACTO ============= */
+.contact-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    animation: fadeInUp 1s ease 0.4s forwards;
     opacity: 0;
-    transition: all 0.4s ease;
 }
 
-.contacto-card:hover .contacto-icon::after {
-    opacity: 0.3;
-    transform: scale(1.3);
+.form-group {
+    margin-bottom: 1.5rem;
 }
 
-.contacto-card:hover .contacto-icon {
-    transform: scale(1.15) rotate(360deg);
-    box-shadow: 0 10px 25px rgba(69, 162, 158, 0.5);
-}
-
-.contacto-nome {
-    font-size: 20px;
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
     font-weight: 600;
     color: var(--preto);
-    margin-bottom: 10px;
-    transition: color 0.3s ease;
 }
 
-.contacto-card:hover .contacto-nome {
-    color: var(--cor1);
-}
-
-.contacto-info {
-    font-size: 16px;
-    color: rgba(26, 26, 26, 0.7);
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-}
-
-.contacto-card:hover .contacto-info {
-    transform: translateY(-3px);
-}
-
-/* ============= BOTÕES ============= */
-.contacto-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    background: linear-gradient(135deg, var(--cor1) 0%, var(--cor2) 100%);
-    color: var(--branco);
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(69, 162, 158, 0.3);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.contacto-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
+.form-group input,
+.form-group textarea {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.3),
-        transparent
-    );
-    transition: left 0.5s ease;
+    padding: 1rem;
+    border: 2px solid rgba(69, 162, 158, 0.3);
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
 }
 
-.contacto-link:hover::before {
-    left: 100%;
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--cor1);
+    box-shadow: 0 0 0 3px rgba(69, 162, 158, 0.1);
 }
 
-.contacto-link::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, var(--cor1), var(--cor2));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(69, 162, 158, 0.3);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(69, 162, 158, 0.4);
+}
+
+/* ============= REDES SOCIAIS ============= */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.social-link {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    transform: translate(-50%, -50%);
-    transition: width 0.4s ease, height 0.4s ease;
-    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(69, 162, 158, 0.3);
 }
 
-.contacto-link:hover::after {
-    width: 300px;
-    height: 300px;
+.social-link:hover {
+    background: linear-gradient(135deg, var(--cor1), var(--cor2));
+    border-color: transparent;
+    transform: translateY(-5px);
 }
 
-.contacto-link .arrow {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: inline-block;
+.social-link svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--cor1);
+    transition: stroke 0.3s ease;
 }
 
-.contacto-link:hover .arrow {
-    transform: translateX(6px);
-}
-
-.contacto-link:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 12px 30px rgba(69, 162, 158, 0.5);
-    background: linear-gradient(135deg, var(--cor2) 0%, var(--cor1) 100%);
-}
-
-.contacto-link:active {
-    transform: translateY(-1px) scale(1.01);
-    box-shadow: 0 5px 15px rgba(69, 162, 158, 0.4);
-}
-
-/* ============= EFEITO RIPPLE ============= */
-.ripple-effect {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    transform: scale(0);
-    animation: ripple-animation 0.6s ease-out;
-    pointer-events: none;
-}
-
-@keyframes ripple-animation {
-    to {
-        transform: scale(2.5);
-        opacity: 0;
-    }
+.social-link:hover svg {
+    stroke: white;
 }
 
 /* ============= FOOTER ============= */
-footer {
+.footer {
     width: 100%;
-    background: var(--branco);
-    color: var(--preto);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 1.5rem;
     text-align: center;
-    padding: 25px 20px;
-    font-size: 14px;
-    border-top: 1px solid var(--cinza);
+    font-size: 0.875rem;
+    margin-top: 4rem;
 }
 
 /* ============= ANIMAÇÕES ============= */
@@ -542,103 +461,77 @@ footer {
 @keyframes fadeInScale {
     from {
         opacity: 0;
-        transform: scale(0.8) translateY(20px);
+        transform: scale(0.8);
     }
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: scale(1);
+    }
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
     }
 }
 
 /* ============= RESPONSIVO ============= */
-@media (max-width: 1024px) {
-    header {
-        padding: 20px 30px;
-    }
-    nav a {
-        margin-left: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: flex;
-    }
-
-    nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 280px;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 100px 30px 30px;
-        gap: 0;
-        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    nav.active {
-        right: 0;
-    }
-
-    nav a {
-        width: 100%;
-        padding: 1rem 1.5rem;
-        font-size: 1.1rem;
-        border-radius: 12px;
-        margin: 0 0 0.5rem 0;
-        text-align: left;
-        color: var(--preto);
-    }
-
-    nav a::after {
+@media (max-width: 767px) {
+    .nav-desktop {
         display: none;
     }
 
-    nav a:hover {
-        background: rgba(69, 162, 158, 0.1);
-        transform: translateX(5px);
+    .hamburger {
+        display: flex;
     }
 
-    .contactos-title {
-        font-size: 36px;
+    .contact-title {
+        font-size: 2rem;
     }
 
-    .contactos-grid {
+    .contact-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 1.5rem;
     }
 
-    header {
-        padding: 15px 20px;
+    .contact-form-container {
+        padding: 2rem 1.5rem;
     }
 
-    header.scrolled {
-        padding: 12px 20px;
+    .contact-section {
+        padding: 3rem 1rem;
     }
 }
 
 @media (max-width: 480px) {
-    nav {
+    .mobile-menu {
         width: 100%;
     }
 
-    nav a {
-        font-size: 1.05rem;
+    .contact-title {
+        font-size: 1.75rem;
     }
 
-    .contactos-title {
-        font-size: 28px;
+    .contact-card {
+        padding: 2rem 1.5rem;
     }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-    nav a {
-        margin-left: 15px;
-        font-size: 0.9rem;
+@media (min-width: 768px) {
+    .hamburger {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .header-container {
+        padding: 1rem 3rem;
+    }
+
+    .contact-section {
+        padding: 5rem 3rem;
     }
 }
