@@ -24,6 +24,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    cursor: none;
 }
 
 /* ============= PARTÍCULAS DE FUNDO ============= */
@@ -78,6 +79,7 @@ body {
     mix-blend-mode: difference;
     opacity: 0;
     background-color: transparent;
+    transform: translate(-50%, -50%);
 }
 
 .cursor-follower.expanded {
@@ -87,10 +89,15 @@ body {
 }
 
 @media (hover: none), (pointer: coarse) {
-    .cursor-follower { display: none !important; }
+    .cursor-follower { 
+        display: none !important; 
+    }
+    body {
+        cursor: auto !important;
+    }
 }
 
-/* ============= HEADER - IGUAL À PÁGINA PRINCIPAL ============= */
+/* ============= HEADER ============= */
 header {
     display: flex;
     justify-content: space-between;
@@ -138,8 +145,26 @@ nav a {
     text-decoration: none;
     color: var(--preto);
     font-weight: 600;
-    transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    letter-spacing: 0.3px;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(69, 162, 158, 0.1), rgba(241, 143, 1, 0.1));
+    border-radius: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
 }
 
 nav a::after {
@@ -147,20 +172,26 @@ nav a::after {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -5px;
+    bottom: 0.35rem;
     left: 50%;
-    background-color: var(--cor1);
-    transition: all 0.3s ease;
+    background: linear-gradient(90deg, var(--cor1), var(--cor2));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+nav a:hover::before {
+    opacity: 1;
 }
 
 nav a:hover::after {
-    width: 100%;
+    width: calc(100% - 2rem);
 }
 
 nav a:hover {
     color: var(--cor1);
     transform: translateY(-2px);
+    text-shadow: 0 2px 8px rgba(69, 162, 158, 0.2);
 }
 
 .menu-toggle {
@@ -468,6 +499,23 @@ nav a:hover {
     box-shadow: 0 5px 15px rgba(69, 162, 158, 0.4);
 }
 
+/* ============= EFEITO RIPPLE ============= */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
 /* ============= FOOTER ============= */
 footer {
     width: 100%;
@@ -502,7 +550,7 @@ footer {
     }
 }
 
-/* ============= RESPONSIVO - IGUAL À PÁGINA PRINCIPAL ============= */
+/* ============= RESPONSIVO ============= */
 @media (max-width: 1024px) {
     header {
         padding: 20px 30px;
@@ -581,6 +629,10 @@ footer {
 
     nav a {
         font-size: 1.05rem;
+    }
+
+    .contactos-title {
+        font-size: 28px;
     }
 }
 

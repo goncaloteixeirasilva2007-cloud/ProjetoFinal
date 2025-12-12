@@ -1,71 +1,76 @@
 // ============= CURSOR PERSONALIZADO =============
 const cursorFollower = document.getElementById('cursorFollower');
-let mouseX = 0, mouseY = 0;
-let followerX = 0, followerY = 0;
 
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursorFollower.style.opacity = '1';
-});
+if (cursorFollower) {
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
 
-// Esconde o cursor quando sai da janela
-document.addEventListener('mouseleave', () => {
-    cursorFollower.style.opacity = '0';
-});
-
-// Mostra o cursor quando entra na janela
-document.addEventListener('mouseenter', () => {
-    cursorFollower.style.opacity = '1';
-});
-
-// Expandir cursor ao passar por elementos interativos
-const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
-interactiveElements.forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        cursorFollower.classList.add('expanded');
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorFollower.style.opacity = '1';
     });
-    
-    element.addEventListener('mouseleave', () => {
-        cursorFollower.classList.remove('expanded');
-    });
-});
 
-// Animação suave do cursor
-function animateCursor() {
-    const diffX = mouseX - followerX;
-    const diffY = mouseY - followerY;
-    
-    followerX += diffX * 0.15;
-    followerY += diffY * 0.15;
-    
-    cursorFollower.style.left = followerX + 'px';
-    cursorFollower.style.top = followerY + 'px';
-    
-    requestAnimationFrame(animateCursor);
+    // Esconde o cursor quando sai da janela
+    document.addEventListener('mouseleave', () => {
+        cursorFollower.style.opacity = '0';
+    });
+
+    // Mostra o cursor quando entra na janela
+    document.addEventListener('mouseenter', () => {
+        cursorFollower.style.opacity = '1';
+    });
+
+    // Expandir cursor ao passar por elementos interativos
+    const interactiveElements = document.querySelectorAll('a, button, .contacto-card');
+    interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursorFollower.classList.add('expanded');
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            cursorFollower.classList.remove('expanded');
+        });
+    });
+
+    // Animação suave do cursor
+    function animateCursor() {
+        const diffX = mouseX - followerX;
+        const diffY = mouseY - followerY;
+        
+        followerX += diffX * 0.15;
+        followerY += diffY * 0.15;
+        
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
 }
 
-animateCursor();
-
-// ============= MENU MOBILE - IGUAL À PÁGINA PRINCIPAL =============
+// ============= MENU MOBILE =============
 const menuToggle = document.getElementById('menuToggle');
 const nav = document.getElementById('nav');
 
-menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-});
-
-// Fechar menu ao clicar em link
-const navLinks = document.querySelectorAll('nav a');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        menuToggle.classList.remove('active');
-        document.body.style.overflow = '';
+if (menuToggle && nav) {
+    menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
     });
-});
+
+    // Fechar menu ao clicar em link
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            menuToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+}
 
 // ============= HEADER SCROLL =============
 const header = document.getElementById('header');
@@ -84,39 +89,42 @@ window.addEventListener('scroll', () => {
 });
 
 // ============= ANIMAÇÃO DE PARTÍCULAS =============
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = 30;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
+const particlesContainer = document.getElementById('particles');
+
+if (particlesContainer) {
+    function createParticles() {
+        const particleCount = 30;
         
-        // Posição inicial aleatória
-        particle.style.left = Math.random() * 100 + '%';
-        
-        // Tamanho aleatório
-        const size = Math.random() * 4 + 2;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        
-        // Delay aleatório
-        particle.style.animationDelay = Math.random() * 8 + 's';
-        
-        // Duração aleatória
-        particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
-        
-        // Cor aleatória entre cor1 e cor2
-        const colors = ['#45A29E', '#F18F01'];
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
-        particlesContainer.appendChild(particle);
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Posição inicial aleatória
+            particle.style.left = Math.random() * 100 + '%';
+            
+            // Tamanho aleatório
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            // Delay aleatório
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            
+            // Duração aleatória
+            particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+            
+            // Cor aleatória entre cor1 e cor2
+            const colors = ['#45A29E', '#F18F01'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            particlesContainer.appendChild(particle);
+        }
     }
+
+    createParticles();
 }
 
-createParticles();
-
-// ============= EFEITO TILT NOS CARDS =============
+// ============= EFEITO TILT 3D NOS CARDS =============
 const cards = document.querySelectorAll('.contacto-card[data-tilt]');
 
 cards.forEach(card => {
@@ -165,7 +173,7 @@ allCards.forEach(card => {
     observer.observe(card);
 });
 
-// ============= EFEITO DE ONDULAÇÃO SUAVE NOS BOTÕES =============
+// ============= EFEITO DE ONDULAÇÃO (RIPPLE) NOS BOTÕES =============
 const buttons = document.querySelectorAll('.contacto-link');
 
 buttons.forEach(button => {
@@ -190,38 +198,12 @@ buttons.forEach(button => {
     });
 });
 
-// CSS para efeito ripple suave
-const style = document.createElement('style');
-style.textContent = `
-    .contacto-link {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .ripple-effect {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.4);
-        transform: scale(0);
-        animation: ripple-animation 0.6s ease-out;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(2.5);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
 // ============= SMOOTH SCROLL PARA LINKS INTERNOS =============
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
+            e.preventDefault();
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -237,8 +219,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// ============= ANIMAÇÃO DE ENTRADA DOS ELEMENTOS =============
+window.addEventListener('load', () => {
+    // Anima o título
+    const title = document.querySelector('.contactos-title');
+    if (title) {
+        setTimeout(() => {
+            title.style.animation = 'gradient-shift 3s ease infinite, titleBounce 1s ease';
+        }, 200);
+    }
+});
+
+// ============= PARALLAX SUAVE NO SCROLL =============
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.contacto-card');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.05 * (index + 1);
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+            
+            ticking = false;
+        });
+        
+        ticking = true;
+    }
+});
+
 // ============= LOG DE BOAS-VINDAS =============
 console.log('%c👋 Olá! Bem-vindo à página de contactos!', 'color: #45A29E; font-size: 20px; font-weight: bold;');
 console.log('%c💼 Entre em contacto comigo através dos canais disponíveis!', 'color: #F18F01; font-size: 14px;');
-
+console.log('%c✨ Efeitos carregados: Cursor personalizado, Partículas, Tilt 3D, Ripple, Parallax', 'color: #45A29E; font-size: 12px;');
 console.log('✅ Script de contactos carregado com sucesso!');
