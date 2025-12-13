@@ -1,5 +1,5 @@
 /* ===============================================
-   CONTACTOS - JAVASCRIPT
+   CONTACTOS - JAVASCRIPT COM FORMSPREE
    =============================================== */
 
 // ============= HAMBURGER MENU =============
@@ -100,54 +100,106 @@ shakeStyle.textContent = `
 `;
 document.head.appendChild(shakeStyle);
 
-// ============= FORMULÁRIO DE CONTACTO =============
+// ============= FORMSPREE - FORMULÁRIO DE CONTACTO =============
+const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const subjectInput = document.getElementById('subject');
-const messageInput = document.getElementById('message');
+const FORMSPREE_URL = 'https://formspree.io/f/xovgrkke';
 
-if (submitBtn) {
-    submitBtn.addEventListener('click', (e) => {
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Validação simples
-        if (!nameInput.value || !emailInput.value || !subjectInput.value || !messageInput.value) {
-            alert('Por favor, preencha todos os campos!');
+        // Obter valores dos campos
+        const formData = new FormData(contactForm);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message')
+        };
+        
+        // Validação básica
+        if (!data.name || !data.email || !data.subject || !data.message) {
+            showNotification('❌ Por favor, preencha todos os campos!', 'error');
             return;
         }
-
-        // Validação de email
+        
+        // Validar email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailInput.value)) {
-            alert('Por favor, insira um email válido!');
+        if (!emailRegex.test(data.email)) {
+            showNotification('❌ Por favor, insira um email válido!', 'error');
             return;
         }
-
-        // Animação de sucesso
+        
+        // Desabilitar botão e mostrar loading
+        submitBtn.disabled = true;
         submitBtn.textContent = 'Enviando...';
         submitBtn.style.background = 'linear-gradient(135deg, #45A29E, #45A29E)';
-        submitBtn.disabled = true;
         
-        // Simular envio (aqui você integraria com um backend real)
-        setTimeout(() => {
-            submitBtn.textContent = '✓ Mensagem Enviada!';
-            submitBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+        try {
+            const response = await fetch(FORMSPREE_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
             
-            // Limpar formulário
-            nameInput.value = '';
-            emailInput.value = '';
-            subjectInput.value = '';
-            messageInput.value = '';
+            if (response.ok) {
+                showNotification('✅ Mensagem enviada com sucesso!', 'success');
+                contactForm.reset();
+                
+                // Animação de sucesso no botão
+                submitBtn.textContent = '✓ Enviado!';
+                submitBtn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                
+                setTimeout(() => {
+                    submitBtn.textContent = 'Enviar Mensagem';
+                    submitBtn.style.background = 'linear-gradient(135deg, var(--cor1), var(--cor2))';
+                    submitBtn.disabled = false;
+                }, 3000);
+            } else {
+                throw new Error('Erro ao enviar');
+            }
+        } catch (error) {
+            showNotification('❌ Erro ao enviar mensagem. Tente novamente.', 'error');
+            console.error('Erro:', error);
             
-            // Resetar botão após 3 segundos
-            setTimeout(() => {
-                submitBtn.textContent = 'Enviar Mensagem';
-                submitBtn.style.background = 'linear-gradient(135deg, var(--cor1), var(--cor2))';
-                submitBtn.disabled = false;
-            }, 3000);
-        }, 1500);
+            submitBtn.textContent = 'Enviar Mensagem';
+            submitBtn.style.background = 'linear-gradient(135deg, var(--cor1), var(--cor2))';
+            submitBtn.disabled = false;
+        }
     });
+}
+
+// ============= SISTEMA DE NOTIFICAÇÕES =============
+function showNotification(message, type = 'success') {
+    // Remover notificação anterior se existir
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    // Criar notificação
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    // Adicionar ao body
+    document.body.appendChild(notification);
+    
+    // Mostrar notificação com delay
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Remover após 4 segundos
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 4000);
 }
 
 // ============= ANIMAÇÃO DOS CARDS AO SCROLL =============

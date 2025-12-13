@@ -1,5 +1,5 @@
 /* ===============================================
-   GALERIA DO MUSEU - CSS
+   GALERIA DO MUSEU - CSS (MOLDURAS FINAS)
    =============================================== */
 
 :root {
@@ -24,7 +24,7 @@ body {
     color: var(--preto);
     overflow-x: hidden;
     min-height: 100vh;
-    cursor: none; /* Esconde o cursor padrão */
+    cursor: none;
 }
 
 /* ============= CURSOR CUSTOMIZADO ============= */
@@ -40,7 +40,7 @@ body {
     mix-blend-mode: difference;
     opacity: 0;
     background-color: transparent;
-    transform: translate(-50%, -50%); /* Centraliza o cursor */
+    transform: translate(-50%, -50%);
 }
 
 .cursor-follower.expanded {
@@ -49,7 +49,6 @@ body {
     background-color: rgba(69, 162, 158, 0.2);
 }
 
-/* Desativa em dispositivos touch */
 @media (hover: none), (pointer: coarse) {
     .cursor-follower {
         display: none !important;
@@ -368,7 +367,7 @@ body {
     padding: 1.25rem;
 }
 
-/* ============= MOLDURAS DAS FOTOS ============= */
+/* ============= MOLDURAS FINAS DAS FOTOS ============= */
 .photo-frame {
     position: relative;
     cursor: pointer;
@@ -409,14 +408,15 @@ body {
     opacity: 0.8;
 }
 
+/* MOLDURA FINA */
 .frame-border {
     position: relative;
-    padding: 1.25rem;
+    padding: 0.5rem; /* Reduzido de 1.25rem para 0.5rem */
     background: linear-gradient(145deg, #8b7355, #5c4a3a);
-    border: 3px solid #d4af37;
+    border: 2px solid #d4af37; /* Reduzido de 3px para 2px */
     box-shadow: 
-        inset 0 2px 5px rgba(255, 255, 255, 0.3),
-        inset 0 -2px 5px rgba(0, 0, 0, 0.5),
+        inset 0 1px 3px rgba(255, 255, 255, 0.3), /* Reduzido */
+        inset 0 -1px 3px rgba(0, 0, 0, 0.5), /* Reduzido */
         0 10px 30px rgba(0, 0, 0, 0.7);
     overflow: hidden;
 }
@@ -424,16 +424,16 @@ body {
 .frame-border::before {
     content: '';
     position: absolute;
-    inset: 15px;
-    border: 2px solid #a67c52;
+    inset: 8px; /* Reduzido de 15px para 8px */
+    border: 1px solid #a67c52; /* Reduzido de 2px para 1px */
     pointer-events: none;
 }
 
 .frame-border::after {
     content: '';
     position: absolute;
-    inset: 10px;
-    border: 1px solid rgba(212, 175, 55, 0.4);
+    inset: 6px; /* Reduzido de 10px para 6px */
+    border: 1px solid rgba(212, 175, 55, 0.3);
     pointer-events: none;
 }
 
@@ -472,9 +472,9 @@ body {
 
 .photo-info {
     position: absolute;
-    bottom: 25px;
-    left: 25px;
-    right: 25px;
+    bottom: 12px; /* Ajustado de 25px para 12px */
+    left: 12px; /* Ajustado de 25px para 12px */
+    right: 12px; /* Ajustado de 25px para 12px */
     background: rgba(0, 0, 0, 0.85);
     padding: 0.75rem 0.9375rem;
     transform: translateY(100%);
@@ -495,7 +495,7 @@ body {
     display: block;
 }
 
-/* ============= MODAL COM MOLDURA DE MUSEU ============= */
+/* ============= MODAL COM MOLDURA FINA ============= */
 .photo-modal {
     position: fixed;
     top: 0;
@@ -547,14 +547,15 @@ body {
     z-index: -1;
 }
 
+/* MOLDURA FINA NO MODAL */
 .modal-frame-border {
     position: relative;
-    padding: 1.875rem;
+    padding: 0.75rem; /* Reduzido de 1.875rem para 0.75rem */
     background: linear-gradient(145deg, #8b7355, #5c4a3a);
-    border: 5px solid #d4af37;
+    border: 3px solid #d4af37; /* Reduzido de 5px para 3px */
     box-shadow: 
-        inset 0 3px 8px rgba(255, 255, 255, 0.3),
-        inset 0 -3px 8px rgba(0, 0, 0, 0.5),
+        inset 0 2px 5px rgba(255, 255, 255, 0.3), /* Reduzido */
+        inset 0 -2px 5px rgba(0, 0, 0, 0.5), /* Reduzido */
         0 20px 60px rgba(0, 0, 0, 0.9);
     overflow: hidden;
 }
@@ -562,16 +563,16 @@ body {
 .modal-frame-border::before {
     content: '';
     position: absolute;
-    inset: 22px;
-    border: 3px solid #a67c52;
+    inset: 12px; /* Reduzido de 22px para 12px */
+    border: 2px solid #a67c52; /* Reduzido de 3px para 2px */
     pointer-events: none;
 }
 
 .modal-frame-border::after {
     content: '';
     position: absolute;
-    inset: 16px;
-    border: 2px solid rgba(212, 175, 55, 0.4);
+    inset: 8px; /* Reduzido de 16px para 8px */
+    border: 1px solid rgba(212, 175, 55, 0.4); /* Reduzido de 2px para 1px */
     pointer-events: none;
 }
 
@@ -766,7 +767,7 @@ body {
     }
 
     .frame-border {
-        padding: 0.75rem;
+        padding: 0.4rem; /* Ainda mais fino em mobile */
     }
 
     .frame-border img {
@@ -783,6 +784,9 @@ body {
 
     .photo-info {
         padding: 0.5rem 0.625rem;
+        bottom: 8px;
+        left: 8px;
+        right: 8px;
     }
 
     .photo-title {
@@ -790,8 +794,8 @@ body {
     }
 
     .modal-frame-border {
-        padding: 0.9375rem;
-        border-width: 3px;
+        padding: 0.5rem; /* Moldura fina em mobile */
+        border-width: 2px;
     }
 
     .modal-frame-border img {
