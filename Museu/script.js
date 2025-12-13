@@ -169,14 +169,14 @@ function initGallery() {
             allPhotos.push({
                 src: img.src,
                 alt: img.alt || '',
-                title: title ? title.textContent : ''
+                title: title ? title.textContent : 'Sem título'
             });
 
             frame.style.cursor = 'pointer';
             frame.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Clicou na foto:', index);
+                console.log('Clicou na foto:', index, 'Título:', title ? title.textContent : 'Sem título');
                 openModal(index);
             });
         }
@@ -207,13 +207,14 @@ function openModal(index) {
             <div class="modal-frame-shadow"></div>
             <div class="modal-frame-border">
                 <img src="${photo.src}" alt="${photo.alt}">
+                <div class="modal-frame-spotlight"></div>
             </div>
-            <div class="modal-frame-spotlight"></div>
         </div>
     `;
     
     if (modalTitle) {
         modalTitle.textContent = photo.title;
+        console.log('Título atualizado para:', photo.title);
     }
     
     photoModal.classList.add('active');
@@ -245,8 +246,8 @@ function navigateModal(direction) {
             <div class="modal-frame-shadow"></div>
             <div class="modal-frame-border">
                 <img src="${photo.src}" alt="${photo.alt}">
+                <div class="modal-frame-spotlight"></div>
             </div>
-            <div class="modal-frame-spotlight"></div>
         </div>
     `;
     

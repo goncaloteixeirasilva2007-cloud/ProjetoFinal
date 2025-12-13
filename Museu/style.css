@@ -547,7 +547,7 @@ body {
     z-index: -1;
 }
 
-/* MOLDURA UNIFORME NO MODAL - MESMO TAMANHO EM TODAS AS PLATAFORMAS */
+/* MOLDURA UNIFORME NO MODAL - TAMANHO FIXO EM TODAS AS PLATAFORMAS */
 .modal-frame-border {
     position: relative;
     padding: 0.75rem;
@@ -558,6 +558,8 @@ body {
         inset 0 -2px 5px rgba(0, 0, 0, 0.5),
         0 20px 60px rgba(0, 0, 0, 0.9);
     overflow: hidden;
+    width: 400px;
+    height: 480px;
 }
 
 .modal-frame-border::before {
@@ -577,8 +579,8 @@ body {
 }
 
 .modal-frame-border img {
-    width: 400px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
@@ -601,15 +603,20 @@ body {
 
 .modal-info {
     text-align: center;
-    margin-top: 2.5rem;
-    position: relative;
+    margin-top: 2rem;
+    position: absolute;
+    bottom: -70px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 600px;
 }
 
 .modal-info h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--branco);
     font-family: 'Inter', sans-serif;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .modal-close {
@@ -820,11 +827,26 @@ body {
         height: 40px;
     }
 
-    .modal-frame-border img {
-        max-width: 85vw;
-        max-height: 55vh;
-        width: auto;
+    .modal-frame-border {
+        width: 90vw;
+        max-width: 400px;
         height: auto;
+        aspect-ratio: 5/6;
+    }
+    
+    .modal-frame-border img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .modal-info {
+        bottom: -70px;
+        max-width: 90%;
+    }
+    
+    .modal-info h3 {
+        font-size: 1.2rem;
     }
 }
 
