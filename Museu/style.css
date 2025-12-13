@@ -683,6 +683,7 @@ body {
 
     .frame-border img {
         height: 250px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
 }
 
@@ -710,6 +711,7 @@ body {
     /* AJUSTA ALTURA DA IMAGEM PROPORCIONALMENTE */
     .frame-border img {
         height: 220px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
 
     .series-title {
@@ -735,6 +737,7 @@ body {
     /* AJUSTA ALTURA DA IMAGEM PARA MOBILE */
     .frame-border img {
         height: 180px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
 
     .gallery-title {
