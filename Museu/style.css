@@ -1,5 +1,5 @@
 /* ===============================================
-   GALERIA DO MUSEU - CSS (MOLDURAS FINAS)
+   GALERIA DO MUSEU - CSS (MOLDURAS UNIFORMES)
    =============================================== */
 
 :root {
@@ -367,7 +367,7 @@ body {
     padding: 1.25rem;
 }
 
-/* ============= MOLDURAS FINAS DAS FOTOS ============= */
+/* ============= MOLDURAS UNIFORMES EM TODAS AS PLATAFORMAS ============= */
 .photo-frame {
     position: relative;
     cursor: pointer;
@@ -408,15 +408,15 @@ body {
     opacity: 0.8;
 }
 
-/* MOLDURA FINA */
+/* MOLDURA UNIFORME - MESMO TAMANHO EM TODAS AS PLATAFORMAS */
 .frame-border {
     position: relative;
-    padding: 0.5rem; /* Reduzido de 1.25rem para 0.5rem */
+    padding: 0.5rem;
     background: linear-gradient(145deg, #8b7355, #5c4a3a);
-    border: 2px solid #d4af37; /* Reduzido de 3px para 2px */
+    border: 2px solid #d4af37;
     box-shadow: 
-        inset 0 1px 3px rgba(255, 255, 255, 0.3), /* Reduzido */
-        inset 0 -1px 3px rgba(0, 0, 0, 0.5), /* Reduzido */
+        inset 0 1px 3px rgba(255, 255, 255, 0.3),
+        inset 0 -1px 3px rgba(0, 0, 0, 0.5),
         0 10px 30px rgba(0, 0, 0, 0.7);
     overflow: hidden;
 }
@@ -424,15 +424,15 @@ body {
 .frame-border::before {
     content: '';
     position: absolute;
-    inset: 8px; /* Reduzido de 15px para 8px */
-    border: 1px solid #a67c52; /* Reduzido de 2px para 1px */
+    inset: 8px;
+    border: 1px solid #a67c52;
     pointer-events: none;
 }
 
 .frame-border::after {
     content: '';
     position: absolute;
-    inset: 6px; /* Reduzido de 10px para 6px */
+    inset: 6px;
     border: 1px solid rgba(212, 175, 55, 0.3);
     pointer-events: none;
 }
@@ -472,9 +472,9 @@ body {
 
 .photo-info {
     position: absolute;
-    bottom: 12px; /* Ajustado de 25px para 12px */
-    left: 12px; /* Ajustado de 25px para 12px */
-    right: 12px; /* Ajustado de 25px para 12px */
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
     background: rgba(0, 0, 0, 0.85);
     padding: 0.75rem 0.9375rem;
     transform: translateY(100%);
@@ -495,7 +495,7 @@ body {
     display: block;
 }
 
-/* ============= MODAL COM MOLDURA FINA ============= */
+/* ============= MODAL COM MOLDURA UNIFORME ============= */
 .photo-modal {
     position: fixed;
     top: 0;
@@ -547,15 +547,15 @@ body {
     z-index: -1;
 }
 
-/* MOLDURA FINA NO MODAL */
+/* MOLDURA UNIFORME NO MODAL - MESMO TAMANHO EM TODAS AS PLATAFORMAS */
 .modal-frame-border {
     position: relative;
-    padding: 0.75rem; /* Reduzido de 1.875rem para 0.75rem */
+    padding: 0.75rem;
     background: linear-gradient(145deg, #8b7355, #5c4a3a);
-    border: 3px solid #d4af37; /* Reduzido de 5px para 3px */
+    border: 3px solid #d4af37;
     box-shadow: 
-        inset 0 2px 5px rgba(255, 255, 255, 0.3), /* Reduzido */
-        inset 0 -2px 5px rgba(0, 0, 0, 0.5), /* Reduzido */
+        inset 0 2px 5px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.5),
         0 20px 60px rgba(0, 0, 0, 0.9);
     overflow: hidden;
 }
@@ -563,16 +563,16 @@ body {
 .modal-frame-border::before {
     content: '';
     position: absolute;
-    inset: 12px; /* Reduzido de 22px para 12px */
-    border: 2px solid #a67c52; /* Reduzido de 3px para 2px */
+    inset: 12px;
+    border: 2px solid #a67c52;
     pointer-events: none;
 }
 
 .modal-frame-border::after {
     content: '';
     position: absolute;
-    inset: 8px; /* Reduzido de 16px para 8px */
-    border: 1px solid rgba(212, 175, 55, 0.4); /* Reduzido de 2px para 1px */
+    inset: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
     pointer-events: none;
 }
 
@@ -717,11 +717,26 @@ body {
 /* ============= RESPONSIVO ============= */
 
 /* Tablet */
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
     .gallery-title {
         font-size: 3rem;
     }
 
+    .hamburger {
+        display: none;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .frame-border img {
+        height: 250px;
+    }
+}
+
+@media (min-width: 768px) {
     .hamburger {
         display: none;
     }
@@ -742,8 +757,9 @@ body {
         padding: 0.75rem;
     }
 
+    /* AJUSTA ALTURA DA IMAGEM PROPORCIONALMENTE */
     .frame-border img {
-        height: 200px;
+        height: 220px;
     }
 
     .series-title {
@@ -766,12 +782,9 @@ body {
         gap: 1rem;
     }
 
-    .frame-border {
-        padding: 0.4rem; /* Ainda mais fino em mobile */
-    }
-
+    /* AJUSTA ALTURA DA IMAGEM PARA MOBILE */
     .frame-border img {
-        height: 150px;
+        height: 180px;
     }
 
     .gallery-title {
@@ -780,29 +793,6 @@ body {
 
     .series-title {
         font-size: 1.5rem;
-    }
-
-    .photo-info {
-        padding: 0.5rem 0.625rem;
-        bottom: 8px;
-        left: 8px;
-        right: 8px;
-    }
-
-    .photo-title {
-        font-size: 0.75rem;
-    }
-
-    .modal-frame-border {
-        padding: 0.5rem; /* Moldura fina em mobile */
-        border-width: 2px;
-    }
-
-    .modal-frame-border img {
-        max-width: 90vw;
-        max-height: 60vh;
-        width: auto;
-        height: auto;
     }
 
     .audio-control {
@@ -828,6 +818,13 @@ body {
         font-size: 2rem;
         width: 40px;
         height: 40px;
+    }
+
+    .modal-frame-border img {
+        max-width: 85vw;
+        max-height: 55vh;
+        width: auto;
+        height: auto;
     }
 }
 
