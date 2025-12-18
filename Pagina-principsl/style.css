@@ -24,6 +24,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background: var(--cor3);
+    cursor: none;
 }
 
 /* HEADER */
@@ -206,16 +207,21 @@ nav a:hover {
     .cursor-follower {
         display: none !important;
     }
+
+    /* On touch / coarse pointers keep the system cursor enabled */
+    body {
+        cursor: auto !important;
+    }
 }
 
 /* ENTER BUTTON */
 .enter {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
+    font-family: inherit;
+    font-weight: 600;
     font-size: 20px;
     padding: 16px 50px;
     color: var(--preto);
-    text-transform: uppercase;
+    text-transform: none;
     background: linear-gradient(135deg, var(--branco) 0%, var(--cor3) 100%);
     border: 2px solid var(--cor1);
     border-radius: 60px;

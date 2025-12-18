@@ -203,3 +203,35 @@ const imageObserver = new IntersectionObserver((entries, observer) => {
 images.forEach(img => imageObserver.observe(img));
 
 console.log('✅ Script da página Sobre Mim carregado com sucesso!');
+
+// ============================================
+// DEBUG: identificar elementos que provocam overflow
+// ============================================
+function markOverflowingElements() {
+    const els = Array.from(document.querySelectorAll('body *'));
+    const overflowers = els.filter(el => {
+        const cs = getComputedStyle(el);
+        if (cs.display === 'none' || cs.visibility === 'hidden') return false;
+        return el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1;
+    });
+
+    if (overflowers.length === 0) {
+        console.log('No overflowing elements detected.');
+        return;
+    }
+
+    console.log('Overflowing elements:', overflowers);
+    overflowers.forEach(el => {
+        const prev = el.style.outline;
+        el.style.outline = '3px solid rgba(255,0,0,0.7)';
+        setTimeout(() => el.style.outline = prev, 3000);
+    });
+}
+
+const pageFooter = document.querySelector('footer');
+if (pageFooter) {
+    pageFooter.addEventListener('mouseenter', () => {
+        console.log('Footer hover: checking for overflow...');
+        markOverflowingElements();
+    });
+}
