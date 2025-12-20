@@ -6,9 +6,8 @@
     <title>Sobre Mim • Meu Museu Digital</title>
 
     <!-- Fontes -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
-    <!-- Link para CSS externo -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,34 +15,22 @@
     <!-- Cursor customizado -->
     <div class="cursor-follower" id="cursorFollower"></div>
 
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="header-container">
-            <a href="../Pagina-principsl/index.html" class="logo-link">
-                <img src="../img/G__1_-removebg-preview.png" alt="Logo" class="logo" id="logo" />
+    <!-- HEADER - IGUAL À PÁGINA PRINCIPAL -->
+    <header id="header">
+        <div class="logo">
+            <a href="../Pagina-principsl/index.html">
+                <img src="../img/G__1_-removebg-preview.png" alt="Logo" />
             </a>
-            
-            <!-- Hamburger Menu -->
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <!-- Desktop Nav -->
-            <nav class="nav-desktop">
-                <a href="index.html" class="nav-link active">Sobre Mim</a>
-                <a href="../Museu/index.html" class="nav-link">Museu</a>
-                <a href="../contactos/index.html" class="nav-link">Contactos</a>
-            </nav>
         </div>
-        <!-- Mobile Nav -->
-        <nav class="mobile-menu" id="mobileMenu">
-            <div class="mobile-menu-content">
-                <a href="index.html" class="active">Sobre Mim</a>
-                <a href="../Museu/index.html">Museu</a>
-                <a href="../contactos/index.html">Contactos</a>
-            </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="/Sobre mim/index.html">Sobre Mim</a>
+            <a href="../Museu/index.html">Museu</a>
+            <a href="../contactos/index.html">Contactos</a>
         </nav>
     </header>
 
@@ -108,10 +95,9 @@
 
     <!-- FOOTER -->
     <footer>
-        © 2025 Teixeira Da Silva
+        <p>&copy; 2025 Teixeira Da Silva</p>
     </footer>
 
-    <!-- Link para JavaScript externo -->
     <script src="script.js"></script>
 </body>
 </html>

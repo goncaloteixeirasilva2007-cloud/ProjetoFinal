@@ -1,41 +1,63 @@
 // ============================================
+// HEADER SCROLL EFFECT
+// ============================================
+const header = document.getElementById('header');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// ============================================
 // CURSOR FOLLOWER
 // ============================================
 const cursorFollower = document.getElementById('cursorFollower');
 
-if (cursorFollower) {
-    let mouseX = 0, mouseY = 0;
-    let fx = 0, fy = 0;
+let mouseX = 0, mouseY = 0;
+let followerX = 0, followerY = 0;
 
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursorFollower.style.opacity = '1';
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorFollower.style.opacity = '1';
+});
+
+// Elementos interativos expandem o cursor
+const interactiveElements = document.querySelectorAll('a, button, .card');
+
+interactiveElements.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+        cursorFollower.classList.add('expanded');
     });
-
-    const interactive = document.querySelectorAll(
-        'a, button, input, textarea, select, .card'
-    );
-
-    interactive.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursorFollower.classList.add('expanded');
-        });
-        el.addEventListener('mouseleave', () => {
-            cursorFollower.classList.remove('expanded');
-        });
+    
+    element.addEventListener('mouseleave', () => {
+        cursorFollower.classList.remove('expanded');
     });
+});
 
-    function animateCursor() {
-        fx += (mouseX - fx) * 0.15;
-        fy += (mouseY - fy) * 0.15;
-        cursorFollower.style.left = fx + 'px';
-        cursorFollower.style.top = fy + 'px';
-        requestAnimationFrame(animateCursor);
-    }
-
-    animateCursor();
+// Animação suave do cursor
+function animateCursor() {
+    const diffX = mouseX - followerX;
+    const diffY = mouseY - followerY;
+    
+    followerX += diffX * 0.1;
+    followerY += diffY * 0.1;
+    
+    cursorFollower.style.left = followerX + 'px';
+    cursorFollower.style.top = followerY + 'px';
+    
+    requestAnimationFrame(animateCursor);
 }
+
+animateCursor();
 
 // ============================================
 // INTERSECTION OBSERVER (ANIMAÇÕES)
@@ -62,26 +84,4 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// ============================================
-// MOBILE MENU — IGUAL AO DA HOME
-// ============================================
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-
-if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-        const isOpen = mobileMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        document.body.classList.toggle('menu-open', isOpen);
-    });
-
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        });
-    });
-}
-
-console.log('✅ Sobre Mim JS carregado (menu mobile igual à Home)');
+console.log('✅ Sobre Mim carregado - Menu inline igual à página principal');

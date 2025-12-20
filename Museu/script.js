@@ -2,27 +2,21 @@
    GALERIA DO MUSEU - JAVASCRIPT
    =============================================== */
 
-// ============= HAMBURGER MENU =============
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
+// ============= HEADER SCROLL EFFECT =============
+const header = document.getElementById('header');
+let lastScroll = 0;
 
-if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-    });
-
-    // Fecha o menu ao clicar num link
-    const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    });
-}
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+    
+    lastScroll = currentScroll;
+});
 
 // ============= CURSOR PERSONALIZADO =============
 const cursorFollower = document.getElementById('cursorFollower');
@@ -290,170 +284,3 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// ============= INTERSECTION OBSERVER - ANIMAÇÕES =============
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observar séries
-document.querySelectorAll('.series-section').forEach(section => {
-    observer.observe(section);
-});
-
-// ============= PARALLAX SUAVE =============
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    
-    // Parallax nas luzes do museu
-    const lights = document.querySelectorAll('.museum-lighting');
-    lights.forEach((light, index) => {
-        const speed = 0.1 + (index * 0.05);
-        light.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-});
-
-// ============= EFEITO DE SHAKE NO LOGO =============
-const logo = document.querySelector('.logo img');
-
-if (logo) {
-    logo.addEventListener('mouseenter', function() {
-        this.style.animation = 'shake 0.5s ease';
-    });
-
-    logo.addEventListener('animationend', function() {
-        this.style.animation = '';
-    });
-}
-
-// Adicionar animação de shake
-const shakeStyle = document.createElement('style');
-shakeStyle.textContent = `
-    @keyframes shake {
-        0%, 100% { transform: rotate(0deg); }
-        25% { transform: rotate(-5deg); }
-        75% { transform: rotate(5deg); }
-    }
-`;
-document.head.appendChild(shakeStyle);
-
-// ============= LAZY LOADING MELHORADO =============
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.src;
-                img.classList.add('loaded');
-                observer.unobserve(img);
-            }
-        });
-    });
-
-    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// ============= EFEITO DE ILUMINAÇÃO DINÂMICA =============
-document.querySelectorAll('.photo-frame').forEach(frame => {
-    frame.addEventListener('mouseenter', function() {
-        const spotlight = this.querySelector('.frame-spotlight');
-        if (spotlight) {
-            spotlight.style.opacity = '1';
-        }
-    });
-
-    frame.addEventListener('mouseleave', function() {
-        const spotlight = this.querySelector('.frame-spotlight');
-        if (spotlight) {
-            spotlight.style.opacity = '0';
-        }
-    });
-});
-
-// ============= SMOOTH SCROLL =============
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            
-            // Fecha o menu mobile se estiver aberto
-            if (mobileMenu && mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-    });
-});
-
-// ============= INDICADOR DE CARREGAMENTO =============
-window.addEventListener('load', () => {
-    console.log('🎨 Museu Digital carregado com sucesso!');
-    
-    // Fade in suave de todas as imagens
-    document.querySelectorAll('.photo-frame img').forEach((img, index) => {
-        setTimeout(() => {
-            img.style.opacity = '1';
-        }, index * 50);
-    });
-});
-
-// ============= DICAS DE INTERAÇÃO =============
-const showInteractionHint = () => {
-    const hint = document.createElement('div');
-    hint.style.cssText = `
-        position: fixed;
-        bottom: 100px;
-        right: 30px;
-        background: rgba(69, 162, 158, 0.9);
-        color: white;
-        padding: 15px 20px;
-        border-radius: 10px;
-        font-size: 14px;
-        z-index: 1000;
-        animation: fadeIn 0.5s ease;
-    `;
-    hint.textContent = '💡 Clique nas fotos para ampliar!';
-    document.body.appendChild(hint);
-    
-    setTimeout(() => {
-        hint.style.animation = 'fadeOut 0.5s ease forwards';
-        setTimeout(() => hint.remove(), 500);
-    }, 4000);
-};
-
-// Mostrar dica após 3 segundos
-setTimeout(showInteractionHint, 3000);
-
-// Adicionar animações de fade
-const fadeStyle = document.createElement('style');
-fadeStyle.textContent = `
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeOut {
-        from { opacity: 1; transform: translateY(0); }
-        to { opacity: 0; transform: translateY(20px); }
-    }
-`;
-document.head.appendChild(fadeStyle);
-
-console.log('✅ Script da Galeria do Museu carregado com sucesso!');
