@@ -49,7 +49,7 @@ body {
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
-    z-index: 9998;
+    z-index: 10000;
     transition: all 0.15s ease;
     mix-blend-mode: difference;
     opacity: 0;
@@ -72,7 +72,7 @@ body {
 }
 
 /* ============================================
-   HEADER - IGUAL À PÁGINA PRINCIPAL
+   HEADER - NAVBAR FIXA
    ============================================ */
 header {
     display: flex;
@@ -82,9 +82,9 @@ header {
     padding: 20px 50px;
     background: var(--branco);
     border-bottom: 1px solid var(--cinza);
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 10;
+    z-index: 9999;
     box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
 }
@@ -162,7 +162,7 @@ nav a:hover {
     width: 100%;
     max-width: 100vw;
     padding: 5rem 1.5rem;
-    padding-top: 140px;
+    padding-top: 180px;
     position: relative;
     overflow: hidden;
 }
@@ -197,6 +197,7 @@ nav a:hover {
    ============================================ */
 .title-section {
     margin-bottom: 3.5rem;
+    margin-top: 3rem;
 }
 
 .title-label {
@@ -374,7 +375,7 @@ footer {
 }
 
 /* ============================================
-   RESPONSIVE - IGUAL À PÁGINA PRINCIPAL
+   RESPONSIVE
    ============================================ */
 @media (max-width: 1024px) {
     header {
@@ -408,7 +409,6 @@ footer {
         font-size: 2rem;
     }
 
-    /* AJUSTE: Puxar "SOBRE MIM" mais para cima */
     .main-section {
         padding-top: 90px;
     }
@@ -437,13 +437,11 @@ footer {
         touch-action: pan-y;
     }
 
-    /* AJUSTE: Ainda mais próximo em mobile pequeno */
     .main-section {
         padding-top: 80px;
     }
 }
 
-/* Tablet adjustments */
 @media (min-width: 769px) and (max-width: 1024px) {
     nav a {
         margin-left: 18px;

@@ -1,28 +1,22 @@
 /* ===============================================
-   CONTACTOS - JAVASCRIPT COM FORMSPREE
+   CONTACTOS - JAVASCRIPT COM MENU INLINE
    =============================================== */
 
-// ============= HAMBURGER MENU =============
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
+// ============= HEADER SCROLL EFFECT =============
+const header = document.getElementById('header');
+let lastScroll = 0;
 
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-  });
-
-  // Fecha o menu ao clicar num link
-  const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
-  mobileMenuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.remove('active');
-      hamburger.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-  });
-}
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  
+  if (currentScroll > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+  
+  lastScroll = currentScroll;
+});
 
 // ============= CURSOR PERSONALIZADO =============
 const cursorFollower = document.getElementById('cursorFollower');
@@ -237,4 +231,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-console.log('✅ Página de Contactos carregada com sucesso!');
+console.log('✅ Página de Contactos carregada com sucesso - Menu inline igual à página principal!');
