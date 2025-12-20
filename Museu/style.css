@@ -192,6 +192,11 @@ body {
     transform: translateX(-50%);
 }
 
+/* Remove underline bar (handled on Sobre mim) */
+.nav-link::after {
+    display: none !important;
+}
+
 .nav-link:hover::after,
 .nav-link.active::after {
     width: 100%;
@@ -215,11 +220,13 @@ body {
     box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    overflow-y: auto;
+    overflow: hidden;
+    touch-action: none;
 }
 
 .mobile-menu.active {
     right: 0;
+    touch-action: auto;
 }
 
 .mobile-menu-content {

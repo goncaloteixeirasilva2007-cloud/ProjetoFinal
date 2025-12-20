@@ -6,26 +6,6 @@ window.addEventListener('load', () => {
     }, 1000);
 });
 
-// Menu toggle para mobile
-const menuToggle = document.getElementById('menuToggle');
-const nav = document.getElementById('nav');
-
-menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-});
-
-// Fecha o menu ao clicar num link
-const navLinks = document.querySelectorAll('nav a');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        menuToggle.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-});
-
 // Header scroll effect
 const header = document.getElementById('header');
 let lastScroll = 0;
@@ -142,3 +122,6 @@ if (enterBtn) {
         // Exemplo: window.location.href = 'outra-pagina.html';
     });
 }
+
+// Mobile menu toggle (adds off-canvas behaviour)
+// (mobile toggle removed — behaviour handled elsewhere or not required)

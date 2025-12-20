@@ -1,35 +1,11 @@
 // ============================================
-// HAMBURGER MENU - CORRIGIDO
-// ============================================
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-
-if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-    });
-
-    // Fecha o menu ao clicar num link
-    const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    });
-}
-
-// ============================================
-// CURSOR FOLLOWER - CORRIGIDO E OTIMIZADO
+// CURSOR FOLLOWER
 // ============================================
 const cursorFollower = document.getElementById('cursorFollower');
 
 if (cursorFollower) {
     let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
+    let fx = 0, fy = 0;
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -37,40 +13,24 @@ if (cursorFollower) {
         cursorFollower.style.opacity = '1';
     });
 
-    // Esconde o cursor quando sai da janela
-    document.addEventListener('mouseleave', () => {
-        cursorFollower.style.opacity = '0';
-    });
+    const interactive = document.querySelectorAll(
+        'a, button, input, textarea, select, .card'
+    );
 
-    // Mostra o cursor quando entra na janela
-    document.addEventListener('mouseenter', () => {
-        cursorFollower.style.opacity = '1';
-    });
-
-    // Elementos interativos expandem o cursor - CORRIGIDO
-    const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .card');
-
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
+    interactive.forEach(el => {
+        el.addEventListener('mouseenter', () => {
             cursorFollower.classList.add('expanded');
         });
-        
-        element.addEventListener('mouseleave', () => {
+        el.addEventListener('mouseleave', () => {
             cursorFollower.classList.remove('expanded');
         });
     });
 
-    // Animação suave do cursor
     function animateCursor() {
-        const diffX = mouseX - followerX;
-        const diffY = mouseY - followerY;
-        
-        followerX += diffX * 0.15;
-        followerY += diffY * 0.15;
-        
-        cursorFollower.style.left = followerX + 'px';
-        cursorFollower.style.top = followerY + 'px';
-        
+        fx += (mouseX - fx) * 0.15;
+        fy += (mouseY - fy) * 0.15;
+        cursorFollower.style.left = fx + 'px';
+        cursorFollower.style.top = fy + 'px';
         requestAnimationFrame(animateCursor);
     }
 
@@ -78,160 +38,50 @@ if (cursorFollower) {
 }
 
 // ============================================
-// INTERSECTION OBSERVER - ANIMAÇÕES AO SCROLL
+// INTERSECTION OBSERVER (ANIMAÇÕES)
 // ============================================
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('animate-fade-in-up');
             observer.unobserve(entry.target);
         }
     });
-}, observerOptions);
+}, { threshold: 0.1 });
 
-// Observar elementos
-document.querySelectorAll('.hidden-element').forEach(el => {
-    observer.observe(el);
-});
+document.querySelectorAll('.hidden-element').forEach(el => observer.observe(el));
 
 // ============================================
-// ANIMAÇÃO ESPECIAL PARA CARDS COM DELAY
-// ============================================
-const cards = document.querySelectorAll('[data-card]');
-cards.forEach((card, index) => {
-    setTimeout(() => {
-        observer.observe(card);
-    }, index * 200);
-});
-
-// ============================================
-// PARALLAX NO SCROLL
+// PARALLAX
 // ============================================
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const imageSection = document.getElementById('imageSection');
-    
-    if (imageSection) {
-        imageSection.style.transform = `translateY(${scrolled * 0.05}px)`;
-    }
+    const y = window.pageYOffset;
 
-    // Parallax nos blobs
-    const blobs = document.querySelectorAll('.blob');
-    blobs.forEach((blob, index) => {
-        const speed = (index + 1) * 0.03;
-        blob.style.transform = `translateY(${scrolled * speed}px)`;
+    document.querySelectorAll('.blob').forEach((blob, i) => {
+        blob.style.transform = `translateY(${y * (0.03 * (i + 1))}px)`;
     });
 });
 
 // ============================================
-// CRIAR PARTÍCULAS INTERATIVAS
+// MOBILE MENU — IGUAL AO DA HOME
 // ============================================
-const mainSection = document.getElementById('mainSection');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
 
-if (mainSection) {
-    function createParticle(x, y) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        
-        const tx = (Math.random() - 0.5) * 200;
-        const ty = (Math.random() - 0.5) * 200;
-        
-        particle.style.setProperty('--tx', tx + 'px');
-        particle.style.setProperty('--ty', ty + 'px');
-        
-        mainSection.appendChild(particle);
-        
-        setTimeout(() => particle.remove(), 4000);
-    }
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        document.body.classList.toggle('menu-open', isOpen);
+    });
 
-    // Criar partículas ao mover o mouse (com throttle)
-    let lastParticleTime = 0;
-    mainSection.addEventListener('mousemove', (e) => {
-        const now = Date.now();
-        if (now - lastParticleTime > 100) {
-            createParticle(e.pageX, e.pageY);
-            lastParticleTime = now;
-        }
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
     });
 }
 
-// ============================================
-// SMOOTH SCROLL PARA LINKS INTERNOS
-// ============================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            
-            // Fecha o menu mobile se estiver aberto
-            if (mobileMenu && mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-    });
-});
-
-// ============================================
-// PERFORMANCE: LAZY LOADING PARA IMAGENS
-// ============================================
-const images = document.querySelectorAll('img[data-src]');
-const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-            imageObserver.unobserve(img);
-        }
-    });
-});
-
-images.forEach(img => imageObserver.observe(img));
-
-console.log('✅ Script da página Sobre Mim carregado com sucesso!');
-
-// ============================================
-// DEBUG: identificar elementos que provocam overflow
-// ============================================
-function markOverflowingElements() {
-    const els = Array.from(document.querySelectorAll('body *'));
-    const overflowers = els.filter(el => {
-        const cs = getComputedStyle(el);
-        if (cs.display === 'none' || cs.visibility === 'hidden') return false;
-        return el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1;
-    });
-
-    if (overflowers.length === 0) {
-        console.log('No overflowing elements detected.');
-        return;
-    }
-
-    console.log('Overflowing elements:', overflowers);
-    overflowers.forEach(el => {
-        const prev = el.style.outline;
-        el.style.outline = '3px solid rgba(255,0,0,0.7)';
-        setTimeout(() => el.style.outline = prev, 3000);
-    });
-}
-
-const pageFooter = document.querySelector('footer');
-if (pageFooter) {
-    pageFooter.addEventListener('mouseenter', () => {
-        console.log('Footer hover: checking for overflow...');
-        markOverflowingElements();
-    });
-}
+console.log('✅ Sobre Mim JS carregado (menu mobile igual à Home)');
