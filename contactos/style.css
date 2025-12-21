@@ -37,7 +37,7 @@ body {
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
-  z-index: 9998;
+  z-index: 999999;
   transition: all 0.15s ease;
   mix-blend-mode: difference;
   opacity: 0;
@@ -69,21 +69,26 @@ header {
   padding: 20px 50px;
   background: var(--branco);
   border-bottom: 1px solid var(--cinza);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 10;
+  left: 0;
+  right: 0;
+  z-index: 99999;
   box-shadow: 0 3px 10px rgba(0,0,0,0.05);
   transition: all 0.3s ease;
+  min-height: 80px;
 }
 
 header.scrolled {
   padding: 15px 50px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  min-height: 70px;
 }
 
 header .logo {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 header .logo img {
@@ -100,37 +105,19 @@ header .logo img:hover {
 nav {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  gap: 35px;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 nav a {
-  margin-left: 35px;
   text-decoration: none;
   color: var(--preto);
   font-weight: 600;
   transition: color 0.3s ease, transform 0.3s ease;
   position: relative;
-}
-
-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 50%;
-  background-color: var(--cor1);
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-/* Remove underline bar */
-nav a::after {
-  display: none !important;
-}
-
-nav a:hover::after {
-  width: 100%;
+  white-space: nowrap;
 }
 
 nav a:hover {
@@ -145,9 +132,9 @@ nav a:hover {
 /* ============= SEÇÃO DE CONTACTOS ============= */
 .contact-section {
   position: relative;
-  padding: 5rem 1.5rem;
+  padding: 3rem 1.5rem 1.5rem;
+  margin-top: 80px;
   z-index: 2;
-  min-height: calc(100vh - 200px);
 }
 
 .contact-container {
@@ -157,7 +144,7 @@ nav a:hover {
 
 .contact-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   animation: fadeInUp 1s ease;
 }
 
@@ -189,24 +176,59 @@ nav a:hover {
   line-height: 1.625;
 }
 
-/* ============= GRID DE CONTACTOS ============= */
+/* ============= GRID DE CONTACTOS - ESTILO NEOMORFISMO COM COR ============= */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
+  gap: 3rem;
+  margin-bottom: 3rem;
 }
 
 .contact-card {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(8px);
-  border-radius: 28px;
-  padding: 2rem;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
-  border: none;
+  background: linear-gradient(145deg, #ffffff, #f8f8f8);
+  border-radius: 30px;
+  padding: 3rem 2.5rem;
+  box-shadow: 
+    15px 15px 40px rgba(0, 0, 0, 0.12),
+    -15px -15px 40px rgba(255, 255, 255, 0.8);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: visible;
   animation: fadeInScale 0.8s ease forwards;
   opacity: 0;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(135deg, var(--cor1), var(--cor2), var(--cor1), var(--cor2));
+  background-size: 300% 300%;
+  border-radius: 33px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: gradient-rotate 4s ease infinite;
+  filter: blur(12px);
+  display: none;
+}
+
+.contact-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(69, 162, 158, 0.15), transparent);
+  border-radius: 30px;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s ease;
+  z-index: -1;
+  display: none;
 }
 
 .contact-card:nth-child(1) {
@@ -222,67 +244,128 @@ nav a:hover {
 }
 
 .contact-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(69, 162, 158, 0.12);
-  background: rgba(255, 255, 255, 0.65);
+  transform: translateY(-12px);
+  box-shadow: 
+    20px 20px 60px rgba(0, 0, 0, 0.15),
+    -20px -20px 60px rgba(255, 255, 255, 0.9);
 }
 
 .contact-icon {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   background: linear-gradient(135deg, var(--cor1), var(--cor2));
-  border-radius: 50%;
+  border-radius: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
+  margin: 0 auto 2rem;
+  transition: all 0.4s ease;
+  box-shadow: 
+    8px 8px 20px rgba(69, 162, 158, 0.3),
+    -8px -8px 20px rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-icon::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent);
+  opacity: 0;
+  transition: all 0.4s ease;
+  border-radius: 25px;
 }
 
 .contact-card:hover .contact-icon {
-  transform: scale(1.1) rotate(10deg);
+  transform: scale(1.1);
+  box-shadow: 
+    12px 12px 30px rgba(69, 162, 158, 0.4),
+    -12px -12px 30px rgba(255, 255, 255, 0.6),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.contact-card:hover .contact-icon::before {
+  opacity: 1;
 }
 
 .contact-icon svg {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   stroke: white;
+  stroke-width: 2.5;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.contact-card:hover .contact-icon svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
 .contact-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 1rem;
   color: var(--preto);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .contact-card p {
-  color: rgba(26, 26, 26, 0.7);
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  color: rgba(26, 26, 26, 0.75);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .contact-card a {
-  color: var(--cor1);
+  color: white;
   text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-  word-break: break-all;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 15px;
+  background: linear-gradient(135deg, var(--cor1), var(--cor2));
+  box-shadow: 
+    6px 6px 15px rgba(69, 162, 158, 0.3),
+    -3px -3px 10px rgba(255, 255, 255, 0.5);
+  text-align: center;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 .contact-card a:hover {
-  color: var(--cor2);
+  background: transparent;
+  color: var(--cor1);
+  box-shadow: 
+    8px 8px 20px rgba(69, 162, 158, 0.2),
+    -4px -4px 12px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  border: 2px solid var(--cor1);
 }
 
 /* ============= FORMULÁRIO DE CONTACTO ============= */
 .contact-form-container {
   max-width: 700px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.7);
+  margin: 0 auto 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  padding: 3rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 2.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   animation: fadeInUp 1s ease 0.4s forwards;
   opacity: 0;
 }
@@ -302,7 +385,7 @@ nav a:hover {
 .form-group textarea {
   width: 100%;
   padding: 1rem;
-  border: 2px solid rgba(69, 162, 158, 0.3);
+  border: 2px solid rgba(69, 162, 158, 0.2);
   border-radius: 10px;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
@@ -377,25 +460,26 @@ nav a:hover {
   color: white;
 }
 
-/* ============= REDES SOCIAIS ============= */
+/* ============= REDES SOCIAIS - MAIS PERTO DO FOOTER ============= */
 .social-links {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  margin-top: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .social-link {
   width: 50px;
   height: 50px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  border: 2px solid rgba(69, 162, 158, 0.3);
+  border: 2px solid rgba(69, 162, 158, 0.2);
 }
 
 .social-link:hover {
@@ -421,10 +505,10 @@ nav a:hover {
   background: var(--branco);
   color: var(--preto);
   text-align: center;
-  padding: 25px 20px;
+  padding: 20px;
   font-size: 14px;
   border-top: 1px solid var(--cinza);
-  margin-top: 4rem;
+  margin-top: 0.75rem;
 }
 
 /* ============= ANIMAÇÕES ============= */
@@ -459,33 +543,57 @@ nav a:hover {
   }
 }
 
-/* ============= RESPONSIVO - IGUAL À PÁGINA PRINCIPAL ============= */
+@keyframes gradient-rotate {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ============= RESPONSIVO ============= */
 @media (max-width: 1024px) {
   header {
     padding: 20px 30px;
+    min-height: 75px;
   }
-  nav a {
-    margin-left: 25px;
+  
+  nav {
+    gap: 25px;
+  }
+
+  .contact-section {
+    margin-top: 75px;
   }
 }
 
 @media (max-width: 768px) {
   header {
     padding: 15px 20px;
+    min-height: 65px;
   }
 
   header .logo img {
     height: 40px;
+    margin-right: 15px;
   }
 
   nav {
-    display: flex;
-    flex-direction: row;
+    gap: 15px;
   }
 
   nav a {
-    margin-left: 15px;
     font-size: 0.85rem;
+  }
+
+  .contact-section {
+    padding: 2rem 1rem 1.25rem;
+    margin-top: 65px;
+  }
+
+  .contact-header {
+    margin-bottom: 2rem;
   }
 
   .contact-title {
@@ -494,15 +602,27 @@ nav a:hover {
 
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-card {
+    padding: 2rem;
   }
 
   .contact-form-container {
     padding: 2rem 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
-  .contact-section {
-    padding: 3rem 1rem;
+  .social-links {
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer {
+    margin-top: 0.5rem;
+    padding: 18px;
   }
 
   .notification {
@@ -516,14 +636,19 @@ nav a:hover {
 @media (max-width: 480px) {
   header {
     padding: 12px 15px;
+    min-height: 60px;
   }
 
   header .logo img {
     height: 35px;
+    margin-right: 10px;
+  }
+
+  nav {
+    gap: 10px;
   }
 
   nav a {
-    margin-left: 10px;
     font-size: 0.75rem;
   }
 
@@ -531,29 +656,90 @@ nav a:hover {
     touch-action: pan-y;
   }
 
+  .contact-section {
+    padding: 1.5rem 1rem 1rem;
+    margin-top: 60px;
+  }
+
+  .contact-header {
+    margin-bottom: 1.5rem;
+  }
+
   .contact-title {
     font-size: 1.75rem;
   }
 
+  .contact-grid {
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
   .contact-card {
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .contact-form-container {
+    padding: 1.75rem 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .social-links {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    gap: 1.25rem;
+  }
+
+  .social-link {
+    width: 45px;
+    height: 45px;
+  }
+
+  .footer {
+    margin-top: 0.5rem;
+    padding: 15px;
+    font-size: 12px;
   }
 }
 
-/* Tablet adjustments */
 @media (min-width: 769px) and (max-width: 1024px) {
+  nav {
+    gap: 18px;
+  }
+  
   nav a {
-    margin-left: 18px;
     font-size: 0.9rem;
   }
+
+  .contact-section {
+    padding: 2.5rem 2rem 1.5rem;
+  }
+
+  .social-links {
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer {
+    margin-top: 0.75rem;
+  }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
   header {
     padding: 1rem 3rem;
   }
 
   .contact-section {
-    padding: 5rem 3rem;
+    padding: 3.5rem 3rem 2rem;
+    margin-top: 80px;
+  }
+
+  .social-links {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer {
+    margin-top: 1rem;
   }
 }

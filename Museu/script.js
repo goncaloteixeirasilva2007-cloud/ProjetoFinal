@@ -1,5 +1,5 @@
 /* ===============================================
-   GALERIA DO MUSEU - JAVASCRIPT
+   GALERIA DO MUSEU - JAVASCRIPT COMPLETO
    =============================================== */
 
 // ============= HEADER SCROLL EFFECT =============
@@ -133,7 +133,7 @@ if (audioToggle && audioIcon) {
     });
 }
 
-// ============= MODAL DE FOTO COM MOLDURA =============
+// ============= MODAL DE FOTO =============
 const photoModal = document.getElementById('photoModal');
 const modalContent = document.getElementById('modalContent');
 const modalTitle = document.getElementById('modalTitle');
@@ -283,4 +283,3 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
-
