@@ -1,100 +1,42 @@
 /* ===============================================
-GALERIA DO MUSEU - SCRIPT SEM TRAVAMENTOS
+GALERIA DO MUSEU - SCRIPT OTIMIZADO
 =============================================== */
 
-// ============= LOADING SCREEN E PRELOAD =============
-let imagesLoaded = 0;
-let totalImages = 0;
-
-function showLoadingScreen() {
-    const loadingHTML = `
-        <div class="loading-screen" id="loadingScreen">
-            <div class="loading-spinner"></div>
-            <div class="loading-text">Carregando galeria...</div>
-        </div>
-    `;
-    document.body.insertAdjacentHTML('afterbegin', loadingHTML);
-}
-
-function hideLoadingScreen() {
-    const loadingScreen = document.getElementById('loadingScreen');
-    if (loadingScreen) {
-        loadingScreen.classList.add('hidden');
-        setTimeout(() => loadingScreen.remove(), 500);
-    }
-}
-
-function preloadImages() {
-    const images = document.querySelectorAll('.photo-frame img');
-    totalImages = images.length;
-    
-    if (totalImages === 0) {
-        hideLoadingScreen();
-        return;
-    }
-
-    images.forEach(img => {
-        if (img.complete) {
-            imagesLoaded++;
-            if (imagesLoaded === totalImages) {
-                hideLoadingScreen();
-                console.log(`✅ ${totalImages} imagens carregadas!`);
-            }
-        } else {
-            const newImg = new Image();
-            newImg.onload = () => {
-                imagesLoaded++;
-                if (imagesLoaded === totalImages) {
-                    hideLoadingScreen();
-                    console.log(`✅ ${totalImages} imagens carregadas!`);
-                }
-            };
-            newImg.onerror = () => {
-                imagesLoaded++;
-                if (imagesLoaded === totalImages) {
-                    hideLoadingScreen();
-                }
-            };
-            newImg.src = img.src;
-        }
-    });
-}
-
-// Iniciar loading
-showLoadingScreen();
-
-// ============= HEADER SCROLL =============
+// ============= HEADER SCROLL EFFECT =============
 const header = document.getElementById('header');
-let scrollTimeout;
+let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-        const currentScroll = window.pageYOffset;
-        if (currentScroll > 50) {
-            header?.classList.add('scrolled');
-        } else {
-            header?.classList.remove('scrolled');
-        }
-    }, 10);
-}, { passive: true });
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+
+    lastScroll = currentScroll;
+});
 
 // ============= CURSOR PERSONALIZADO =============
 const cursorFollower = document.getElementById('cursorFollower');
 
-if (cursorFollower && window.matchMedia("(hover: hover)").matches) {
+if (cursorFollower) {
     let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        cursorFollower.style.left = mouseX + 'px';
-        cursorFollower.style.top = mouseY + 'px';
         cursorFollower.style.opacity = '1';
-    }, { passive: true });
+    });
 
     document.addEventListener('mouseleave', () => {
         cursorFollower.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', () => {
+        cursorFollower.style.opacity = '1';
     });
 
     const interactiveElements = document.querySelectorAll('a, button, .photo-frame');
@@ -102,10 +44,26 @@ if (cursorFollower && window.matchMedia("(hover: hover)").matches) {
         element.addEventListener('mouseenter', () => {
             cursorFollower.classList.add('expanded');
         });
+
         element.addEventListener('mouseleave', () => {
             cursorFollower.classList.remove('expanded');
         });
     });
+
+    function animateCursor() {
+        const diffX = mouseX - followerX;
+        const diffY = mouseY - followerY;
+
+        followerX += diffX * 0.15;
+        followerY += diffY * 0.15;
+
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
 }
 
 // ============= ÁUDIO AMBIENTE =============
@@ -115,16 +73,16 @@ const audioToggle = document.getElementById('audioToggle');
 const audioIcon = document.getElementById('audioIcon');
 
 function initAudio() {
-    if (!audio) {
-        audio = new Audio('audio/audiofundo.mp3');
-        audio.loop = true;
-        audio.volume = 0.3;
-    }
+    audio = new Audio('audio/audiofundo.mp3');
+    audio.loop = true;
+    audio.volume = 0.3;
 }
 
 if (audioToggle && audioIcon) {
     audioToggle.addEventListener('click', () => {
-        if (!audio) initAudio();
+        if (!audio) {
+            initAudio();
+        }
 
         if (isPlaying) {
             audio.pause();
@@ -135,7 +93,9 @@ if (audioToggle && audioIcon) {
                 <line x1="17" y1="9" x2="23" y2="15"></line>
             `;
         } else {
-            audio.play().catch(err => console.log('Erro ao reproduzir áudio:', err));
+            audio.play().catch(err => {
+                console.log('Erro ao reproduzir áudio:', err);
+            });
             audioToggle.classList.remove('muted');
             audioIcon.innerHTML = `
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -143,22 +103,30 @@ if (audioToggle && audioIcon) {
                 <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
             `;
         }
+
         isPlaying = !isPlaying;
     });
 
-    // Auto-play
-    const startAudio = () => {
-        if (!audio) initAudio();
-        audio.play();
-        isPlaying = true;
-        audioToggle.classList.remove('muted');
-        audioIcon.innerHTML = `
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-        `;
-    };
-    document.addEventListener('click', startAudio, { once: true, passive: true });
+    document.addEventListener('DOMContentLoaded', () => {
+        const startAudio = () => {
+            if (!audio) initAudio();
+            audio.play();
+            isPlaying = true;
+
+            audioToggle.classList.remove('muted');
+            audioIcon.innerHTML = `
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            `;
+
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('mousemove', startAudio);
+        };
+
+        document.addEventListener('click', startAudio, { once: true });
+        document.addEventListener('mousemove', startAudio, { once: true });
+    });
 }
 
 // ============= MODAL DE FOTO =============
@@ -176,7 +144,7 @@ function initGallery() {
     const photoFrames = document.querySelectorAll('.photo-frame');
 
     if (photoFrames.length === 0) {
-        setTimeout(initGallery, 100);
+        setTimeout(initGallery, 300);
         return;
     }
 
@@ -193,6 +161,7 @@ function initGallery() {
                 title: title ? title.textContent : 'Sem título'
             });
 
+            frame.style.cursor = 'pointer';
             frame.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -201,8 +170,7 @@ function initGallery() {
         }
     });
 
-    console.log(`✅ ${allPhotos.length} fotos prontas!`);
-    preloadImages();
+    console.log(`✅ ${allPhotos.length} fotos prontas para visualização!`);
 }
 
 if (document.readyState === 'loading') {
@@ -298,6 +266,23 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// ============= PARALLAX SUAVE =============
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            const lights = document.querySelectorAll('.museum-lighting');
+            lights.forEach((light, index) => {
+                const speed = 0.1 + (index * 0.05);
+                light.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
 // ============= EFEITO DE SHAKE NO LOGO =============
 const logo = document.querySelector('.logo img');
 
@@ -321,4 +306,4 @@ shakeStyle.textContent = `
 `;
 document.head.appendChild(shakeStyle);
 
-console.log('⚡ Galeria carregada - Zero travamentos!');
+console.log('⚡ Galeria carregada e pronta!');
