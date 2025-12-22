@@ -5,7 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Galeria • Meu Museu Digital</title>
 
+<!-- Preload das primeiras 8 imagens para carregamento instantâneo -->
+<link rel="preload" as="image" href="../img abrstatas/1.jpeg">
+<link rel="preload" as="image" href="../img abrstatas/2.jpeg">
+<link rel="preload" as="image" href="../img abrstatas/3.jpeg">
+<link rel="preload" as="image" href="../img abrstatas/4.jpeg">
+<link rel="preload" as="image" href="../img abrstatas/5.jpeg">
+<link rel="preload" as="image" href="../img abrstatas/6.jpeg">
+<link rel="preload" as="image" href="../img abrstatas/7.jpeg">
+<link rel="preload" as="image" href="../img abrstatas/8.jpeg">
+
 <!-- Fontes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
 <!-- CSS Externo -->
@@ -27,7 +39,7 @@
 </button>
 </div>
 
-<!-- HEADER - IGUAL ÀS OUTRAS PÁGINAS -->
+<!-- HEADER -->
 <header id="header">
 <div class="logo">
 <a href="../Pagina-principsl/index.html">
@@ -61,8 +73,8 @@
 <span class="gallery-subtitle">BEM-VINDO AO MUSEU</span>
 <h1 class="gallery-title">Coleção de Arte Digital</h1>
 <p class="gallery-description">
-Explore três séries fotográficas cuidadosamente curadas,
-cada uma contando sua própria história visual.
+Explora três séries fotográficas cuidadosamente tratadas,
+onde cada uma conta a sua própria história visual.
 </p>
 </div>
 
@@ -70,14 +82,14 @@ cada uma contando sua própria história visual.
 <div class="series-section" data-series="1">
 <div class="series-header">
 <h2 class="series-title">Abstração</h2>
-<p class="series-description">A fotografia de abstração usa cor, luz e forma para sugerir sensações em vez de representar o real de forma direta</p>
+<p class="series-description">A fotografia de abstração usa cor, luz e forma para sugerir sensações em vez de representar o real de forma direta.</p>
 </div>
 
 <div class="gallery-grid">
 <div class="photo-frame" data-photo="1">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img abrstatas/1.jpeg " alt="Natureza 1" loading="lazy">
+<img src="../img abrstatas/1.jpeg" alt="Natureza 1" fetchpriority="high">
 <div class="photo-info">
 <span class="photo-title">Fusão Cromática</span>
 </div>
@@ -88,7 +100,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="2">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img abrstatas/2.jpeg" alt="Natureza 2" loading="lazy">
+<img src="../img abrstatas/2.jpeg" alt="Natureza 2" fetchpriority="high">
 <div class="photo-info">
 <span class="photo-title">Fusão Cromática</span>
 </div>
@@ -99,7 +111,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="3">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img abrstatas/3.jpeg" alt="Natureza 3" loading="lazy">
+<img src="../img abrstatas/3.jpeg" alt="Natureza 3" fetchpriority="high">
 <div class="photo-info">
 <span class="photo-title">Respiração Azul</span>
 </div>
@@ -110,7 +122,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="4">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img abrstatas/4.jpeg" alt="Natureza 4" loading="lazy">
+<img src="../img abrstatas/4.jpeg" alt="Natureza 4" fetchpriority="high">
 <div class="photo-info">
 <span class="photo-title">Vertigem Vermelha</span>
 </div>
@@ -121,7 +133,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="5">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img abrstatas/5.jpeg" alt="Natureza 5" loading="lazy">
+<img src="../img abrstatas/5.jpeg" alt="Natureza 5">
 <div class="photo-info">
 <span class="photo-title">Silêncio Dourado</span>
 </div>
@@ -132,7 +144,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="6">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img abrstatas/6.jpeg" alt="Natureza 6" loading="lazy">
+<img src="../img abrstatas/6.jpeg" alt="Natureza 6">
 <div class="photo-info">
 <span class="photo-title">Ritmos da Cor</span>
 </div>
@@ -143,7 +155,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="7">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img abrstatas/7.jpeg" alt="Natureza 7" loading="lazy">
+<img src="../img abrstatas/7.jpeg" alt="Natureza 7">
 <div class="photo-info">
 <span class="photo-title">Vertigem Vermelha</span>
 </div>
@@ -154,7 +166,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="8">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img abrstatas/8.jpeg " alt="Natureza 8" loading="lazy">
+<img src="../img abrstatas/8.jpeg" alt="Natureza 8">
 <div class="photo-info">
 <span class="photo-title">Explosão Tropical</span>
 </div>
@@ -168,14 +180,14 @@ cada uma contando sua própria história visual.
 <div class="series-section" data-series="2">
 <div class="series-header">
 <h2 class="series-title">Paisagem</h2>
-<p class="series-description">A fotografia de paisagem regista espaços exteriores para transmitir a atmosfera e a sensação de estar nesse lugar</p>
+<p class="series-description">A fotografia de paisagem regista espaços exteriores para transmitir a atmosfera e a sensação de estar nesse lugar.</p>
 </div>
 
 <div class="gallery-grid">
 <div class="photo-frame" data-photo="9">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img paisagem/IMG_0785_polarr.jpeg" alt="Urbano 1" loading="lazy">
+<img src="../img paisagem/IMG_0785_polarr.jpeg" alt="Urbano 1">
 <div class="photo-info">
 <span class="photo-title">Horizontes do Seixoso</span>
 </div>
@@ -186,7 +198,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="10">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img paisagem/IMG_0819_polarr.jpeg" alt="Urbano 2" loading="lazy">
+<img src="../img paisagem/IMG_0819_polarr.jpeg" alt="Urbano 2">
 <div class="photo-info">
 <span class="photo-title">Horizontes do Seixoso</span>
 </div>
@@ -197,7 +209,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="11">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img paisagem/IMG_0960_polarr.jpeg" alt="Urbano 3" loading="lazy">
+<img src="../img paisagem/IMG_0960_polarr.jpeg" alt="Urbano 3">
 <div class="photo-info">
 <span class="photo-title">Fluxos de Verde</span>
 </div>
@@ -208,7 +220,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="12">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img paisagem/IMG_1690_polarr.jpeg" alt="Urbano 4" loading="lazy">
+<img src="../img paisagem/IMG_1690_polarr.jpeg" alt="Urbano 4">
 <div class="photo-info">
 <span class="photo-title">Fluxos de Verde</span>
 </div>
@@ -219,7 +231,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="13">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img paisagem/IMG_2908_polarr.jpeg" alt="Urbano 5" loading="lazy">
+<img src="../img paisagem/IMG_2908_polarr.jpeg" alt="Urbano 5">
 <div class="photo-info">
 <span class="photo-title">Horizontes do Seixoso</span>
 </div>
@@ -230,7 +242,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="14">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img paisagem/IMG_4056_polarr.jpeg" alt="Urbano 6" loading="lazy">
+<img src="../img paisagem/IMG_4056_polarr.jpeg" alt="Urbano 6">
 <div class="photo-info">
 <span class="photo-title">Horizontes do Seixoso</span>
 </div>
@@ -241,7 +253,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="15">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img paisagem/IMG_4677_polarr.jpeg" alt="Urbano 7" loading="lazy">
+<img src="../img paisagem/IMG_4677_polarr.jpeg" alt="Urbano 7">
 <div class="photo-info">
 <span class="photo-title">Fluxos de Verde</span>
 </div>
@@ -252,7 +264,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="16">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../img paisagem/IMG_8708_polarr.jpeg" alt="Urbano 8" loading="lazy">
+<img src="../img paisagem/IMG_8708_polarr.jpeg" alt="Urbano 8">
 <div class="photo-info">
 <span class="photo-title">Veia Vermelha</span>
 </div>
@@ -266,14 +278,14 @@ cada uma contando sua própria história visual.
 <div class="series-section" data-series="3">
 <div class="series-header">
 <h2 class="series-title">Autorretratos</h2>
-<p class="series-description">A fotografia de autorretrato usa o próprio corpo do fotógrafo para explorar identidade e emoções</p>
+<p class="series-description">A fotografia de autorretrato explora identidade e emoções.</p>
 </div>
 
 <div class="gallery-grid">
 <div class="photo-frame" data-photo="17">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../retrato/IMG_1170_polarr.jpeg" alt="Abstrato 1" loading="lazy">
+<img src="../retrato/IMG_1170_polarr.jpeg" alt="Abstrato 1">
 <div class="photo-info">
 <span class="photo-title">Expressões Desconstruídas</span>
 </div>
@@ -284,7 +296,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="18">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../retrato/IMG_1271_polarr.jpeg" alt="Abstrato 2" loading="lazy">
+<img src="../retrato/IMG_1271_polarr.jpeg" alt="Abstrato 2">
 <div class="photo-info">
 <span class="photo-title">Efémero</span>
 </div>
@@ -295,7 +307,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="19">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../retrato/IMG_1762_polarr.jpeg" alt="Abstrato 3" loading="lazy">
+<img src="../retrato/IMG_1762_polarr.jpeg" alt="Abstrato 3">
 <div class="photo-info">
 <span class="photo-title">Expressões Desconstruídas</span>
 </div>
@@ -306,7 +318,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="20">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../retrato/IMG_3815_polarr.jpeg" alt="Abstrato 4" loading="lazy">
+<img src="../retrato/IMG_3815_polarr.jpeg" alt="Abstrato 4">
 <div class="photo-info">
 <span class="photo-title">Expressões Desconstruídas</span>
 </div>
@@ -317,7 +329,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="21">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../retrato/IMG_4343_polarr.jpeg" alt="Abstrato 5" loading="lazy">
+<img src="../retrato/IMG_4343_polarr.jpeg" alt="Abstrato 5">
 <div class="photo-info">
 <span class="photo-title">Efémero</span>
 </div>
@@ -328,7 +340,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="22">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../retrato/IMG_5960_polarr.jpeg" alt="Abstrato 6" loading="lazy">
+<img src="../retrato/IMG_5960_polarr.jpeg" alt="Abstrato 6">
 <div class="photo-info">
 <span class="photo-title">O Fumo Que Não Sou</span>
 </div>
@@ -339,7 +351,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="23">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../retrato/IMG_7441_polarr.jpeg" alt="Abstrato 7" loading="lazy">
+<img src="../retrato/IMG_7441_polarr.jpeg" alt="Abstrato 7">
 <div class="photo-info">
 <span class="photo-title">Expressões Desconstruídas</span>
 </div>
@@ -350,7 +362,7 @@ cada uma contando sua própria história visual.
 <div class="photo-frame" data-photo="24">
 <div class="frame-shadow"></div>
 <div class="frame-border">
-<img src="../retrato/IMG_8807_polarr.jpeg" alt="Abstrato 8" loading="lazy">
+<img src="../retrato/IMG_8807_polarr.jpeg" alt="Abstrato 8">
 <div class="photo-info">
 <span class="photo-title">Expressões Desconstruídas</span>
 </div>
@@ -368,9 +380,7 @@ cada uma contando sua própria história visual.
 <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
 <button class="modal-nav modal-prev" id="modalPrev" aria-label="Anterior">‹</button>
 <button class="modal-nav modal-next" id="modalNext" aria-label="Próximo">›</button>
-<div class="modal-content" id="modalContent">
-<!-- A moldura será inserida aqui pelo JavaScript -->
-</div>
+<div class="modal-content" id="modalContent"></div>
 <div class="modal-info">
 <h3 id="modalTitle"></h3>
 </div>
