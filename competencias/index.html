@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Competências • Meu Museu Digital</title>
+
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Cursor customizado -->
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- HEADER - IGUAL À PÁGINA PRINCIPAL -->
+    <header id="header">
+        <div class="logo">
+            <a href="../Pagina-principsl/index.html">
+                <img src="../img/G__1_-removebg-preview.png" alt="Logo" />
+            </a>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav">
+            <a href="/Sobre mim/index.html">Sobre Mim</a>
+            <a href="../competencias/index.html">Competências</a>
+            <a href="../Museu/index.html">Museu</a>
+            <a href="../contactos/index.html">Contactos</a>
+        </nav>
+    </header>
+
+    <!-- SEÇÃO COMPETÊNCIAS -->
+    <section class="main-section" id="mainSection">
+        <!-- Blobs decorativos -->
+        <div class="blob" id="blob1"></div>
+        <div class="blob" id="blob2"></div>
+        <div class="blob" id="blob3"></div>
+        <div class="blob" id="blob4"></div>
+        <div class="blob" id="blob5"></div>
+
+        <div class="content-container">
+            <!-- Título -->
+            <div class="title-section hidden-element" id="titleSection">
+                <span class="title-label">COMPETÊNCIAS</span>
+                <h1 class="main-title">As minhas áreas de especialização</h1>
+            </div>
+
+            <!-- Cartões de Competências -->
+            <div class="skills-container" id="skillsContainer">
+                <!-- CARD 1 - VÍDEO -->
+                <div class="card card1 hidden-element" data-card="1">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Vídeo</h3>
+                    <p class="card-text">
+                        Criação de conteúdo audiovisual de alta qualidade, acompanhando cada projeto desde a conceção até à pós-produção. Um trabalho especializado em storytelling visual e em narrativas envolventes.
+                    </p>
+                </div>
+
+                <!-- CARD 2 - FOTOGRAFIA -->
+                <div class="card card2 hidden-element" data-card="2">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Fotografia</h3>
+                    <p class="card-text">
+                        Captura de momentos únicos através de um olhar que combina sensibilidade artística e rigor técnico. Experiência em diversos estilos fotográficos, aliada ao domínio da luz natural e artificial, para transformar instantes efémeros em imagens que permanecem na memória.
+                    </p>
+                </div>
+
+                <!-- CARD 3 - EDIÇÃO -->
+                <div class="card card3 hidden-element" data-card="3">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </div>
+                    <h3 class="card-title">Edição</h3>
+                    <p class="card-text">
+                        Transformação de material bruto em obras finalizadas. Domínio de software profissional de edição, color grading e motion graphics para resultados impactantes e profissionais.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Rodapé da secção -->
+            <div class="footer-text hidden-element" id="footerText">
+                <p>A criar experiências visuais únicas ✦</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Teixeira Da Silva</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

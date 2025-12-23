@@ -39,7 +39,8 @@ if (cursorFollower) {
         cursorFollower.style.opacity = '1';
     });
 
-    const interactiveElements = document.querySelectorAll('a, button, .card');
+    // Adiciona os cards de sites aos elementos interativos
+    const interactiveElements = document.querySelectorAll('a, button, .card, .site-card');
 
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
@@ -80,6 +81,28 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.hidden-element').forEach(el => observer.observe(el));
+
+// ============================================
+// ANIMAÇÃO STAGGERED PARA OS CARDS DE SITES
+// ============================================
+const siteCards = document.querySelectorAll('.site-card');
+
+if (siteCards.length > 0) {
+    const sitesObserver = new IntersectionObserver(entries => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Adiciona delay progressivo para cada card
+                setTimeout(() => {
+                    entry.target.classList.add('animate-fade-in-up');
+                }, index * 150); // 150ms de delay entre cada card
+                
+                sitesObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    siteCards.forEach(card => sitesObserver.observe(card));
+}
 
 // ============================================
 // PARALLAX COM OTIMIZAÇÃO
@@ -174,6 +197,29 @@ function preventHorizontalScroll() {
 }
 
 // ============================================
+// EFEITO HOVER ESPECIAL PARA CARDS DE SITES
+// ============================================
+siteCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        // Adiciona leve rotação aos outros cards
+        siteCards.forEach(otherCard => {
+            if (otherCard !== card) {
+                otherCard.style.opacity = '0.7';
+                otherCard.style.transform = 'scale(0.98)';
+            }
+        });
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        // Remove o efeito de todos os cards
+        siteCards.forEach(otherCard => {
+            otherCard.style.opacity = '1';
+            otherCard.style.transform = 'scale(1)';
+        });
+    });
+});
+
+// ============================================
 // OTIMIZAÇÃO DE PERFORMANCE
 // ============================================
 let resizeTimer;
@@ -208,6 +254,7 @@ window.addEventListener('load', () => {
     }, 100);
     
     console.log('✅ Página carregada - Layout otimizado com espaçamento dinâmico');
+    console.log('✅ Secção de Sites Realizados carregada com sucesso');
 });
 
 // ============================================
@@ -244,7 +291,8 @@ if (window.location.search.includes('debug=true')) {
             Viewport: ${window.innerWidth}×${window.innerHeight}px<br>
             Content: ${totalHeight}px<br>
             Empty: ${emptySpace}px<br>
-            Scroll: ${window.pageYOffset}px
+            Scroll: ${window.pageYOffset}px<br>
+            Sites: ${siteCards.length} cards
         `;
     }
     
