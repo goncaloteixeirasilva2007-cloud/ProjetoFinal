@@ -504,7 +504,7 @@ footer {
     }
 }
 
-/* Tablets - 2 colunas */
+/* Tablets - 2 colunas em cima, 1 centralizada embaixo */
 @media (min-width: 600px) and (max-width: 900px) {
     .skills-container {
         grid-template-columns: repeat(2, 1fr);
@@ -518,11 +518,17 @@ footer {
     }
 }
 
-/* Desktop Médio e Grande - 3 colunas */
+/* Desktop Médio e Grande - 2 colunas em cima, 1 centralizada embaixo */
 @media (min-width: 901px) {
     .skills-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 2.5rem;
+    }
+    
+    .card:nth-child(3) {
+        grid-column: 1 / -1;
+        max-width: 50%;
+        margin: 0 auto;
     }
 }
 
